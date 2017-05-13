@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 13 2017 г., 18:00
+-- Время создания: Май 13 2017 г., 19:02
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.6.23
 
@@ -387,6 +387,270 @@ INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `ba
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `oc_blog`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog` (
+  `blog_id` int(11) NOT NULL,
+  `allow_comment` int(1) NOT NULL DEFAULT '1',
+  `count_read` int(11) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1',
+  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `oc_blog`
+--
+
+INSERT INTO `oc_blog` (`blog_id`, `allow_comment`, `count_read`, `sort_order`, `status`, `author`, `date_added`, `image`) VALUES
+(16, 1, 13, 0, 1, 'John', '2015-06-24 03:34:34', 'catalog/shopme_samples/blog_thumb.png'),
+(17, 1, 4, 0, 1, 'John', '2015-06-24 03:36:12', 'catalog/shopme_samples/blog_thumb.png'),
+(18, 1, 14, 0, 1, 'John', '2015-06-24 03:36:58', 'catalog/shopme_samples/blog_thumb.png'),
+(19, 1, 0, 0, 1, 'John', '2015-07-18 22:52:49', 'catalog/shopme_samples/blog_thumb.png');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_category`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_category` (
+  `blog_category_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` int(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_blog_category`
+--
+
+INSERT INTO `oc_blog_category` (`blog_category_id`, `parent_id`, `sort_order`, `date_added`, `status`) VALUES
+(49, 0, 0, '2015-06-24 03:30:28', 1),
+(50, 0, 0, '2015-06-24 03:30:53', 1),
+(51, 0, 0, '2015-06-24 03:31:14', 1),
+(52, 0, 0, '2015-06-24 03:31:28', 1),
+(53, 0, 0, '2015-06-24 03:31:37', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_category_description`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_category_description` (
+  `blog_category_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `meta_keywords` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_blog_category_description`
+--
+
+INSERT INTO `oc_blog_category_description` (`blog_category_id`, `language_id`, `name`, `page_title`, `meta_keywords`, `meta_description`, `description`) VALUES
+(49, 1, 'News', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(49, 2, 'News', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(50, 1, 'About Beauty', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(50, 2, 'About Beauty', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(51, 1, 'Baby &amp; Mom', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(51, 2, 'Baby &amp; Mom', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(52, 1, 'Diet &amp; Fitness', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(52, 2, 'Diet &amp; Fitness', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(53, 1, 'Promotions', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+(53, 2, 'Promotions', '', '', '', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_category_to_layout`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_category_to_layout` (
+  `blog_category_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_category_to_store`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_category_to_store` (
+  `blog_category_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_blog_category_to_store`
+--
+
+INSERT INTO `oc_blog_category_to_store` (`blog_category_id`, `store_id`) VALUES
+(49, 0),
+(50, 0),
+(51, 0),
+(52, 0),
+(53, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_comment` (
+  `blog_comment_id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `comment` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `date_added` datetime DEFAULT '0000-00-00 00:00:00',
+  `status` int(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `oc_blog_comment`
+--
+
+INSERT INTO `oc_blog_comment` (`blog_comment_id`, `blog_id`, `name`, `email`, `comment`, `date_added`, `status`) VALUES
+(21, 16, 'Karl', 'sample@example.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2015-06-24 03:41:27', 1),
+(22, 16, 'John', 'sample@example.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2015-06-24 03:41:42', 1),
+(23, 18, 'Karl', 'sample@example.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2015-06-24 03:41:52', 1),
+(24, 18, 'Andy', 'sample@example.com', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2015-06-24 03:42:29', 1),
+(25, 18, 'Anna', 'sample@example.com', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2015-06-24 03:42:36', 1),
+(26, 16, 'Sample Guy', 'sample@example.com', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2015-06-24 03:43:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_description`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_description` (
+  `blog_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `title` varchar(128) COLLATE utf8_bin NOT NULL,
+  `page_title` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `short_description` text COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `tags` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_blog_description`
+--
+
+INSERT INTO `oc_blog_description` (`blog_id`, `language_id`, `title`, `page_title`, `meta_keyword`, `meta_description`, `short_description`, `description`, `tags`) VALUES
+(16, 2, 'Ut pharetra augue nec augue integer rutrum ante eu lacus', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', ''),
+(16, 1, 'Ut pharetra augue nec augue integer rutrum ante eu lacus', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', ''),
+(17, 2, 'Aliquam dapibus tincidunt metus', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', ''),
+(17, 1, 'Aliquam dapibus tincidunt metus', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', ''),
+(18, 2, 'Sed ut perspiciatis unde omnis iste natus error', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', ''),
+(18, 1, 'Sed ut perspiciatis unde omnis iste natus error', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', 'Spa, Beauty, Relaxing, Lorem, Ipsum, Dolor'),
+(19, 2, 'A blog post about lorem ipsum dolor', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', 'Spa, Beauty, Relaxing, Lorem, Ipsum, Dolor'),
+(19, 1, 'A blog post about lorem ipsum dolor', '', '', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words', '&lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It\r\n has roots in a piece of classical Latin literature from 45 BC, making \r\nit over 2000 years old. Richard McClintock, a Latin professor at \r\nHampden-Sydney College in Virginia, looked up one of the more obscure \r\nLatin words, consectetur, from a Lorem Ipsum passage, and going through \r\nthe cites of the word in classical literature, discovered the \r\nundoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 \r\nof &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by \r\nCicero, written in 45 BC. This book is a treatise on the theory of \r\nethics, very popular during the Renaissance. The first line of Lorem \r\nIpsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section \r\n1.10.32.&lt;/p&gt;&lt;p&gt;The standard chunk of Lorem Ipsum used since the 1500s is\r\n reproduced below for those interested. Sections 1.10.32 and 1.10.33 \r\nfrom &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in \r\ntheir exact original form, accompanied by English versions from the 1914\r\n translation by H. Rackham.&lt;/p&gt;&lt;p&gt;It is a long established fact that a reader will be distracted by the \r\nreadable content of a page when looking at its layout. The point of \r\nusing Lorem Ipsum is that it has a more-or-less normal distribution of \r\nletters, as opposed to using ''Content here, content here'', making it \r\nlook like readable English. Many desktop publishing packages and web \r\npage editors now use Lorem Ipsum as their default model text, and a \r\nsearch for ''lorem ipsum'' will uncover many web sites still in their \r\ninfancy. Various versions have evolved over the years, sometimes by \r\naccident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', 'Spa, Beauty, Relaxing, Lorem, Ipsum, Dolor');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_related`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_related` (
+  `parent_blog_id` int(11) NOT NULL DEFAULT '0',
+  `child_blog_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `oc_blog_related`
+--
+
+INSERT INTO `oc_blog_related` (`parent_blog_id`, `child_blog_id`) VALUES
+(16, 18),
+(16, 17),
+(17, 16),
+(17, 18),
+(18, 16),
+(18, 17);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_to_category`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_to_category` (
+  `blog_id` int(11) NOT NULL,
+  `blog_category_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_blog_to_category`
+--
+
+INSERT INTO `oc_blog_to_category` (`blog_id`, `blog_category_id`) VALUES
+(16, 49),
+(16, 50),
+(16, 51),
+(16, 52),
+(16, 53),
+(17, 50),
+(17, 51),
+(17, 52),
+(18, 49),
+(18, 50),
+(18, 51),
+(18, 52),
+(18, 53);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_to_layout`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_to_layout` (
+  `blog_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_blog_to_store`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_blog_to_store` (
+  `blog_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `oc_blog_to_store`
+--
+
+INSERT INTO `oc_blog_to_store` (`blog_id`, `store_id`) VALUES
+(16, 0),
+(17, 0),
+(18, 0),
+(19, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `oc_cart`
 --
 
@@ -399,7 +663,15 @@ CREATE TABLE IF NOT EXISTS `oc_cart` (
   `option` text NOT NULL,
   `quantity` int(5) NOT NULL,
   `date_added` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `oc_cart`
+--
+
+INSERT INTO `oc_cart` (`cart_id`, `customer_id`, `session_id`, `product_id`, `recurring_id`, `option`, `quantity`, `date_added`) VALUES
+(1, 0, 'kqpupk5tov0tj21gsos7dqpkk6', 40, 0, '[]', 1, '2017-05-13 18:44:19'),
+(2, 0, 'kqpupk5tov0tj21gsos7dqpkk6', 48, 0, '[]', 1, '2017-05-13 18:49:05');
 
 -- --------------------------------------------------------
 
@@ -1099,7 +1371,7 @@ CREATE TABLE IF NOT EXISTS `oc_currency` (
 --
 
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Рубль', 'RUB', '', ' р.', '2', 1.00000000, 1, '2017-05-13 17:52:39'),
+(1, 'Рубль', 'RUB', '', ' р.', '2', 1.00000000, 1, '2017-05-13 18:48:37'),
 (2, 'US Dollar', 'USD', '$', '', '2', 0.01750000, 1, '2017-05-13 17:52:39'),
 (3, 'Euro', 'EUR', '', '€', '2', 0.01600000, 1, '2017-05-13 17:52:39');
 
@@ -1403,7 +1675,7 @@ CREATE TABLE IF NOT EXISTS `oc_extension` (
   `extension_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=457 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_extension`
@@ -1415,20 +1687,35 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (3, 'total', 'sub_total'),
 (4, 'total', 'tax'),
 (5, 'total', 'total'),
-(6, 'module', 'banner'),
-(7, 'module', 'carousel'),
+(431, 'module', 'revslideroutput'),
 (8, 'total', 'credit'),
 (9, 'shipping', 'flat'),
 (10, 'total', 'handling'),
 (11, 'total', 'low_order_fee'),
 (12, 'total', 'coupon'),
-(13, 'module', 'category'),
-(14, 'module', 'account'),
+(430, 'module', 'revslideropencart'),
 (15, 'total', 'reward'),
 (16, 'total', 'voucher'),
 (17, 'payment', 'free_checkout'),
-(18, 'module', 'featured'),
-(19, 'module', 'slideshow');
+(428, 'module', 'shopme'),
+(408, 'module', 'account'),
+(432, 'module', 'showintabs'),
+(433, 'module', 'showintabs_output'),
+(434, 'module', 'shopme_banner'),
+(435, 'module', 'shopme_testimonial'),
+(436, 'module', 'd_ajax_search'),
+(437, 'module', 'newsletter'),
+(438, 'module', 'shopme_content'),
+(440, 'module', 'shopme_tagcloud'),
+(442, 'module', 'shopme_category'),
+(445, 'module', 'blog_category'),
+(446, 'module', 'shopme_recently'),
+(448, 'module', 'shopme_facebook'),
+(449, 'module', 'shopme_twitterfeed'),
+(450, 'module', 'shopme_contact'),
+(454, 'module', 'blog_latest'),
+(455, 'module', 'shopme_carousel'),
+(456, 'module', 'affiliate');
 
 -- --------------------------------------------------------
 
@@ -1620,26 +1907,28 @@ INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `di
 CREATE TABLE IF NOT EXISTS `oc_layout` (
   `layout_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_layout`
 --
 
 INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
-(1, 'Главная'),
-(2, 'Продукт'),
-(3, 'Категория'),
-(4, 'По умолчанию'),
-(5, 'Производитель'),
-(6, 'Аккаунт'),
-(7, 'Оформление заказ'),
-(8, 'Контакты'),
-(9, 'Карта сайта'),
-(10, 'Партнерская программа'),
-(11, 'Информация'),
-(12, 'Сравнение'),
-(13, 'Поиск');
+(1, 'Home'),
+(2, 'Product'),
+(3, 'Category'),
+(4, 'Default'),
+(5, 'Manufacturer'),
+(6, 'Account'),
+(7, 'Checkout'),
+(16, 'Search'),
+(9, 'Sitemap'),
+(10, 'Affiliate'),
+(11, 'Information'),
+(12, 'Compare'),
+(14, 'Footer'),
+(15, 'Blog'),
+(17, 'Popup Login');
 
 -- --------------------------------------------------------
 
@@ -1653,23 +1942,44 @@ CREATE TABLE IF NOT EXISTS `oc_layout_module` (
   `code` varchar(64) NOT NULL,
   `position` varchar(14) NOT NULL,
   `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=673 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_layout_module`
 --
 
 INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
-(2, 4, '0', 'content_top', 0),
-(3, 4, '0', 'content_top', 1),
-(20, 5, '0', 'column_left', 2),
-(69, 10, 'affiliate', 'column_right', 1),
-(68, 6, 'account', 'column_right', 1),
-(67, 1, 'carousel.29', 'content_top', 3),
-(66, 1, 'slideshow.27', 'content_top', 1),
-(65, 1, 'featured.28', 'content_top', 2),
-(72, 3, 'category', 'column_left', 1),
-(73, 3, 'banner.30', 'column_left', 2);
+(661, 1, 'newsletter.53', 'content_top', 0),
+(649, 10, 'affiliate', 'column_left', 1),
+(648, 6, 'account', 'column_left', 0),
+(652, 3, 'shopme_banner.38', 'column_left', 3),
+(651, 3, 'shopme_category', 'column_left', 1),
+(659, 1, 'shopme_content.54', 'home_top', 1),
+(658, 1, 'blog_latest.56', 'content_top', 7),
+(657, 1, 'showintabs_output.34', 'column_left', 2),
+(670, 2, 'shopme_content.47', 'column_left', 2),
+(666, 11, 'newsletter.44', 'column_left', 3),
+(665, 11, 'shopme_banner.38', 'column_left', 2),
+(667, 5, 'shopme_category', 'column_left', 2),
+(257, 16, 'shopme_category', 'column_left', 0),
+(671, 2, 'showintabs_output.43', 'column_left', 3),
+(660, 1, 'shopme_carousel.58', 'content_top', 4),
+(267, 15, 'newsletter.44', 'column_left', 3),
+(266, 15, 'shopme_banner.38', 'column_left', 2),
+(265, 15, 'blog_category', 'column_left', 1),
+(268, 15, 'shopme_banner.42', 'column_left', 4),
+(269, 15, 'shopme_tagcloud', 'column_left', 5),
+(669, 2, 'shopme_recently.52', 'content_bottom', 1),
+(663, 1, 'shopme_banner.33', 'content_top', 6),
+(662, 1, 'shopme_category', 'column_left', 1),
+(656, 1, 'revslideroutput.31', 'content_top', 1),
+(668, 2, 'shopme_content.48', 'column_left', 4),
+(664, 11, 'shopme_category', 'column_left', 1),
+(650, 3, 'shopme_banner.42', 'column_left', 4),
+(655, 1, 'showintabs_output.36', 'content_top', 5),
+(654, 1, 'shopme_testimonial.39', 'column_left', 3),
+(653, 1, 'showintabs_output.35', 'content_top', 3),
+(672, 2, 'shopme_category', 'column_left', 1);
 
 -- --------------------------------------------------------
 
@@ -1682,26 +1992,31 @@ CREATE TABLE IF NOT EXISTS `oc_layout_route` (
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `route` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=209 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_layout_route`
 --
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(38, 6, 0, 'account/%'),
-(17, 10, 0, 'affiliate/%'),
-(44, 3, 0, 'product/category'),
-(42, 1, 0, 'common/home'),
-(20, 2, 0, 'product/product'),
-(24, 11, 0, 'information/information'),
-(23, 7, 0, 'checkout/%'),
-(31, 8, 0, 'information/contact'),
-(32, 9, 0, 'information/sitemap'),
-(34, 4, 0, ''),
-(45, 5, 0, 'product/manufacturer'),
-(52, 12, 0, 'product/compare'),
-(53, 13, 0, 'product/search');
+(194, 10, 0, 'affiliate/%'),
+(202, 1, 0, 'common/home'),
+(207, 2, 0, 'product/product'),
+(199, 7, 0, 'quickcheckout/checkout'),
+(208, 9, 0, 'information/sitemap'),
+(201, 4, 0, ''),
+(205, 5, 0, 'product/manufacturer'),
+(200, 12, 0, 'product/compare'),
+(98, 16, 0, 'product/search'),
+(100, 15, 0, 'blog/%'),
+(197, 3, 0, 'product/category'),
+(206, 17, 0, 'common/popup_login'),
+(198, 7, 0, 'checkout/%'),
+(193, 6, 0, 'account/%'),
+(203, 11, 0, 'information/information'),
+(196, 3, 0, 'product/manufacturer/info'),
+(195, 3, 0, 'product/special'),
+(204, 11, 0, 'information/contact');
 
 -- --------------------------------------------------------
 
@@ -1891,18 +2206,41 @@ CREATE TABLE IF NOT EXISTS `oc_module` (
   `name` varchar(64) NOT NULL,
   `code` varchar(32) NOT NULL,
   `setting` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_module`
 --
 
 INSERT INTO `oc_module` (`module_id`, `name`, `code`, `setting`) VALUES
-(30, 'Category', 'banner', '{"name":"Category","banner_id":"6","width":"182","height":"182","status":"1"}'),
-(29, 'Home Page', 'carousel', '{"name":"Home Page","banner_id":"8","width":"130","height":"100","status":"1"}'),
-(28, 'Home Page', 'featured', '{"name":"Home Page","product":["43","40","42","30"],"limit":"4","width":"200","height":"200","status":"1"}'),
-(27, 'Home Page', 'slideshow', '{"name":"Home Page","banner_id":"7","width":"1140","height":"380","status":"1"}'),
-(31, 'Banner 1', 'banner', '{"name":"Banner 1","banner_id":"6","width":"182","height":"182","status":"1"}');
+(52, 'Recently Viewed Products', 'shopme_recently', '{"name":"Recently Viewed Products","limit":"3","width":"262","height":"262","grid":"grid3","status":"1"}'),
+(53, 'Home Page Popup', 'newsletter', '{"name":"Home Page Popup","module_description":{"1":{"success_message":"","title":"Subscribe Now and get &lt;b&gt;20%&lt;\\/b&gt; off Any Product!","description":"&lt;p&gt;Sign up now and get special offers and news directly to your inbox.&lt;br&gt;&lt;\\/p&gt;"},"2":{"success_message":"","title":"Subscribe Now and get &lt;b&gt;20%&lt;\\/b&gt; off Any Product!","description":"&lt;p&gt;Sign up now and get special offers and news directly to your inbox.&lt;\\/p&gt;"}},"type":"popup","image":"catalog\\/shopme_samples\\/newsletter_thumb.png","delay":"4000","only_once":"0","unsubscribe":"0","status":"1"}'),
+(31, 'Home Slider', 'revslideroutput', '{"name":"Home Slider","slider_id":"1","status":"1"}'),
+(54, 'Home Promos', 'shopme_content', '{"save":"stay","status":"1","name":"Home Promos","template":"info3","columns":"col-20","module_title":{"1":"","2":""},"sections":{"1":{"title":{"1":"","2":""},"icon":{"1":"icon-thumbs-up","2":"icon-thumbs-up"},"h3":{"1":"The Highest &lt;br&gt;Product Quality","2":"The Highest &lt;br&gt;Product Quality"},"block":{"1":"","2":""}},"2":{"title":{"1":"","2":""},"icon":{"1":"icon-paper-plane","2":"icon-paper-plane"},"h3":{"1":"Fast &amp; Free&lt;br&gt;delivery","2":"Fast &amp; Free&lt;br&gt;delivery"},"block":{"1":"","2":""}},"3":{"title":{"1":"","2":""},"icon":{"1":"icon-lock","2":"icon-lock"},"h3":{"1":"Safe &amp; secure&lt;br&gt;payments","2":"Safe &amp; secure&lt;br&gt;payments"},"block":{"1":"","2":""}},"4":{"title":{"1":"","2":""},"icon":{"1":"icon-money","2":"icon-money"},"h3":{"1":"100% Money Back &lt;\\/br&gt;Guaranteed","2":"100% Money Back &lt;\\/br&gt;Guaranteed"},"block":{"1":"","2":""}},"5":{"title":{"1":"","2":""},"icon":{"1":"icon-diamond","2":"icon-diamond"},"h3":{"1":"Get 10% off &lt;br&gt;on reorder","2":"Get 10% off &lt;br&gt;on reorder"},"block":{"1":"","2":""}}}}'),
+(33, 'Home banners', 'shopme_banner', '{"save":"stay","status":"1","name":"Home banners","module_title":{"1":"","2":""},"columns":"col-sm-6","sections":{"1":{"thumb_image":{"1":"catalog\\/shopme_samples\\/banner2.png","2":"catalog\\/shopme_samples\\/banner2.png"},"block":"#"},"2":{"thumb_image":{"1":"catalog\\/shopme_samples\\/banner2.png","2":"catalog\\/shopme_samples\\/banner2.png"},"block":""}}}'),
+(34, 'Column Todays deals', 'showintabs_output', '{"name":"Column Todays deals","status":"1","title":{"1":"&lt;span style=&quot;color:#FF4557&quot;&gt;Today''s Deals&lt;\\/span&gt;","2":"&lt;span style=&quot;color:#FF4557&quot;&gt;Today''s Deals&lt;\\/span&gt;"},"selected_tabs":{"tabs":["2"]},"tab_pos":"0","tab_style":"sm","limit":"4","image_width":"222","image_height":"222","columns":"0, 1","carousel":"0","countdown":"1","link_title":{"1":"View All Deals","2":"View All Deals"},"link_href":"index.php?route=product\\/special"}'),
+(35, 'Home page Large Tabs', 'showintabs_output', '{"name":"Home page Large Tabs","status":"1","title":{"1":"","2":""},"selected_tabs":{"tabs":["1","2","6","8"]},"tab_pos":"0","tab_style":"lg","limit":"6","image_width":"243","image_height":"243","columns":"0, 1], [400, 2], [992, 3","carousel":"0","countdown":"0","link_title":{"1":"","2":""},"link_href":""}'),
+(58, 'Brands Carousel', 'shopme_carousel', '{"name":"Brands Carousel","title":{"1":"Our Brands","2":"Our Brands"},"banner_id":"8","grid":"[[0, 2], [550, 3], [999, 4]]","width":"180","height":"109","status":"1"}'),
+(36, 'Home page New Arrivals', 'showintabs_output', '{"name":"Home page New Arrivals","status":"1","title":{"1":"New Arrivals","2":"New Arrivals"},"selected_tabs":{"tabs":["1"]},"tab_pos":"0","tab_style":"sm","limit":"8","image_width":"188","image_height":"188","columns":"0, 1], [400, 2], [600, 3], [768, 2], [992, 3], [1199, 4","carousel":"0","countdown":"0","link_title":{"1":"","2":""},"link_href":""}'),
+(38, 'Column Banner', 'shopme_banner', '{"save":"stay","status":"1","name":"Column Banner","module_title":{"1":"","2":""},"columns":"col-xs-12","sections":{"1":{"thumb_image":{"1":"catalog\\/shopme_samples\\/banner1.png","2":"catalog\\/shopme_samples\\/banner1.png"},"block":"#"}}}'),
+(39, 'Column Testimonials', 'shopme_testimonial', '{"name":"Column Testimonials","testimonial_title":{"1":"Testimonials","2":"Testimonials"},"testimonial_limit":"3","testimonial_character_limit":"115","testimonial_columns":"grid1","testimonial_random":"1","testimonial_links":"1","status":"1"}'),
+(42, 'Column Banner 2', 'shopme_banner', '{"save":"stay","status":"1","name":"Column Banner 2","module_title":{"1":"","2":""},"columns":"col-xs-12","sections":{"1":{"thumb_image":{"1":"catalog\\/shopme_samples\\/banner3.png","2":"catalog\\/shopme_samples\\/banner3.png"},"block":"#"}}}'),
+(43, 'Column You Might Also Like', 'showintabs_output', '{"name":"Column You Might Also Like","status":"1","title":{"1":"You Might Also Like","2":"You Might Also Like"},"selected_tabs":{"tabs":["1"]},"tab_pos":"0","tab_style":"sm","limit":"3","image_width":"84","image_height":"84","columns":"gridz","carousel":"0","countdown":"0","link_title":{"1":"","2":""},"link_href":""}'),
+(44, 'Column Signup', 'newsletter', '{"name":"Column Signup","module_description":{"1":{"success_message":"","title":"Newsletter Subscribe","description":"&lt;p&gt;Sign up to our newsletter and get latest news and exclusive deals straight to your inbox!&lt;\\/p&gt;"},"2":{"success_message":"","title":"Newsletter Subscribe","description":"&lt;p&gt;Sign up to our newsletter and get latest news and exclusive deals straight to your inbox!&lt;\\/p&gt;"}},"type":"module","image":"","delay":"0","only_once":"0","unsubscribe":"0","status":"1"}'),
+(56, 'Latest Posts', 'blog_latest', '{"name":"Latest Posts","limit":"4","columns":"3","carousel":"1","characters":"80","thumb":"1","width":"243","height":"154","status":"1"}'),
+(47, 'Column Promo', 'shopme_content', '{"save":"stay","status":"1","name":"Column Promo","template":"info2","columns":"col-xs-12","module_title":{"1":"","2":""},"sections":{"1":{"title":{"1":"","2":""},"icon":{"1":"icon-money","2":"icon-money"},"h3":{"1":"100% Money Back Guaranteed","2":"100% Money Back Guaranteed"},"block":{"1":"&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna.&lt;\\/p&gt;&lt;a class=&quot;btn btn-dark&quot;&gt;Read more&lt;\\/a&gt;","2":"&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna.&lt;\\/p&gt;&lt;a class=&quot;btn btn-dark&quot;&gt;Read more&lt;\\/a&gt;"}}}}'),
+(48, 'Column Promo 2', 'shopme_content', '{"save":"stay","status":"1","name":"Column Promo 2","template":"info2","columns":"col-xs-12","module_title":{"1":"","2":""},"sections":{"1":{"title":{"1":"","2":""},"icon":{"1":"icon-lock","2":"icon-lock"},"h3":{"1":"Safe &amp; Secure Payment","2":"Safe &amp; Secure Payment"},"block":{"1":"&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna.&lt;\\/p&gt;&lt;a class=&quot;btn btn-dark&quot;&gt;Read more&lt;\\/a&gt;","2":"&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna.&lt;\\/p&gt;&lt;a class=&quot;btn btn-dark&quot;&gt;Read more&lt;\\/a&gt;"}}}}');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_newsletter`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_newsletter` (
+  `id` int(11) NOT NULL,
+  `email` varchar(96) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2367,13 +2705,13 @@ INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `is
 (36, 'Товар 9', '', '', '', '', '', '', '', 994, 6, 'catalog/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-03 18:09:19', '2011-09-30 01:07:12'),
 (40, 'Товар 11', '', '', '', '', '', '', '', 970, 5, 'catalog/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, 0, '2009-02-03 21:07:12', '2011-09-30 01:06:53'),
 (41, 'Товар 14', '', '', '', '', '', '', '', 977, 5, 'catalog/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, 0, '2009-02-03 21:07:26', '2011-09-30 01:06:44'),
-(42, 'Товар 15', '', '', '', '', '', '', '', 990, 5, 'catalog/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50', 1, '1.00', '2.00', '3.00', 1, 1, 2, 0, 1, 0, '2009-02-03 21:07:37', '2011-09-30 00:46:19'),
+(42, 'Товар 15', '', '', '', '', '', '', '', 990, 5, 'catalog/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50', 1, '1.00', '2.00', '3.00', 1, 1, 2, 0, 1, 5, '2009-02-03 21:07:37', '2011-09-30 00:46:19'),
 (43, 'Товар 16', '', '', '', '', '', '', '', 929, 5, 'catalog/demo/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-03 21:07:49', '2011-09-30 01:05:46'),
 (44, 'Товар 17', '', '', '', '', '', '', '', 1000, 5, 'catalog/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:00', '2011-09-30 01:05:53'),
 (45, 'Товар 18', '', '', '', '', '', '', '', 998, 5, 'catalog/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:17', '2011-09-15 22:22:01'),
 (46, 'Товар 19', '', '', '', '', '', '', '', 1000, 5, 'catalog/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-03 21:08:29', '2011-09-30 01:06:39'),
 (47, 'Товар 21', '', '', '', '', '', '', '', 1000, 5, 'catalog/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00', 1, '0.00', '0.00', '0.00', 1, 0, 1, 0, 1, 0, '2009-02-03 21:08:40', '2011-09-30 01:05:28'),
-(48, 'Товар 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'catalog/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 0, '2009-02-08 17:21:51', '2011-09-30 01:07:06'),
+(48, 'Товар 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'catalog/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, 4, '2009-02-08 17:21:51', '2011-09-30 01:07:06'),
 (49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'catalog/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 1, 1, 0, '2011-04-26 08:57:34', '2011-09-30 01:06:23');
 
 -- --------------------------------------------------------
@@ -2760,6 +3098,21 @@ INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `oc_product_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_product_tab` (
+  `product_id` int(11) NOT NULL,
+  `tab_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `text` text COLLATE utf8_bin NOT NULL,
+  `position` tinyint(1) DEFAULT NULL,
+  `show_empty` tinyint(1) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `oc_product_to_category`
 --
 
@@ -2863,6 +3216,27 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 (47, 0),
 (48, 0),
 (49, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_question`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_question` (
+  `question_id` int(11) NOT NULL,
+  `product_id` int(1) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `text` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `answer` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `private` tinyint(1) NOT NULL DEFAULT '0',
+  `notify` tinyint(1) NOT NULL DEFAULT '1',
+  `date_added` datetime DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3035,6 +3409,144 @@ CREATE TABLE IF NOT EXISTS `oc_review` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `oc_revslider_attachment_images`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_attachment_images` (
+  `ID` int(10) NOT NULL,
+  `file_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_css`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_css` (
+  `id` int(9) NOT NULL,
+  `handle` text NOT NULL,
+  `settings` text,
+  `hover` text,
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `oc_revslider_css`
+--
+
+INSERT INTO `oc_revslider_css` (`id`, `handle`, `settings`, `hover`, `params`) VALUES
+(1, '.tp-caption.lightgrey_divider', '', '', '{"text-decoration":"none","background-color":"rgba(235, 235, 235, 1)","width":"370px","height":"3px","background-position":"initial initial","background-repeat":"initial initial","border-width":"0px","border-color":"rgb(34, 34, 34)","border-style":"none"}'),
+(2, '.tp-caption.heading_lg_white', '', '', '{"font-size":"60px","color":"#ffffff","line-height":"60px","font-family":"\\"Roboto\\", serif"}'),
+(3, '.tp-caption.heading_lg_dark', '', '', '{"font-size":"60px","color":"#333333","line-height":"60px","font-family":"\\"Roboto\\", serif"}'),
+(4, '.tp-caption.heading_lg_main', '', '', '{"font-size":"60px","color":"#018BC8","line-height":"60px","font-family":"\\"Roboto\\", serif"}'),
+(5, '.tp-caption.heading_lg_light_white', '', '', '{"font-size":"60px","color":"#ffffff","line-height":"60px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(6, '.tp-caption.heading_lg_light_dark', '', '', '{"font-size":"60px","color":"#333333","line-height":"60px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(7, '.tp-caption.heading_lg_light_main', '', '', '{"font-size":"60px","color":"#018BC8","line-height":"60px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(8, '.tp-caption.heading_md_white', '', '', '{"font-size":"48px","color":"#ffffff","line-height":"48px","font-family":"\\"Roboto\\", serif"}'),
+(9, '.tp-caption.heading_md_dark', '', '', '{"font-size":"48px","color":"#333333","line-height":"48px","font-family":"\\"Roboto\\", serif"}'),
+(10, '.tp-caption.heading_md_main', '', '', '{"font-size":"48px","color":"#018BC8","line-height":"48px","font-family":"\\"Roboto\\", serif"}'),
+(11, '.tp-caption.heading_md_light_white', '', '', '{"font-size":"48px","color":"#ffffff","line-height":"48px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(12, '.tp-caption.heading_md_light_dark', '', '', '{"font-size":"48px","color":"#333333","line-height":"48px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(13, '.tp-caption.heading_md_light_main', '', '', '{"font-size":"48px","color":"#018BC8","line-height":"48px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(14, '.tp-caption.heading_sm_white', '', '', '{"font-size":"40px","color":"#ffffff","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(15, '.tp-caption.heading_sm_dark', '', '', '{"font-size":"40px","color":"#333333","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(16, '.tp-caption.heading_sm_main', '', '', '{"font-size":"40px","color":"#018BC8","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(17, '.tp-caption.heading_sm_light_white', '', '', '{"font-size":"40px","color":"#ffffff","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(18, '.tp-caption.heading_sm_light_dark', '', '', '{"font-size":"40px","color":"#333333","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(19, '.tp-caption.heading_sm_light_main', '', '', '{"font-size":"40px","color":"#018BC8","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(20, '.tp-caption.paragraph_white', '', '', '{"font-size":"14px","color":"#ffffff","line-height":"21px","font-family":"\\"Roboto\\", serif"}'),
+(21, '.tp-caption.paragraph_dark', '', '', '{"font-size":"14px","color":"#333333","line-height":"21px","font-family":"\\"Roboto\\", serif"}'),
+(22, '.tp-caption.paragraph_main', '', '', '{"font-size":"14px","color":"#018BC8","line-height":"21px","font-family":"\\"Roboto\\", serif"}'),
+(23, '.tp-caption.heading_xs_white', '', '', '{"font-size":"30px","color":"#ffffff","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(24, '.tp-caption.heading_xs_dark', '', '', '{"font-size":"30px","color":"#333333","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(25, '.tp-caption.heading_xs_main', '', '', '{"font-size":"30px","color":"#018BC8","line-height":"40px","font-family":"\\"Roboto\\", serif"}'),
+(26, '.tp-caption.heading_xs_light_white', '', '', '{"font-size":"30px","color":"#ffffff","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(27, '.tp-caption.heading_xs_light_dark', '', '', '{"font-size":"30px","color":"#333333","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}'),
+(28, '.tp-caption.heading_xs_light_main', '', '', '{"font-size":"30px","color":"#018BC8","line-height":"40px","font-family":"\\"Roboto\\", serif","font-weight":"300"}');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_layer_animations`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_layer_animations` (
+  `id` int(9) NOT NULL,
+  `handle` text NOT NULL,
+  `params` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_settings` (
+  `id` int(9) NOT NULL,
+  `general` text NOT NULL,
+  `params` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_sliders`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_sliders` (
+  `id` int(9) NOT NULL,
+  `title` tinytext NOT NULL,
+  `alias` tinytext,
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `oc_revslider_sliders`
+--
+
+INSERT INTO `oc_revslider_sliders` (`id`, `title`, `alias`, `params`) VALUES
+(1, 'boxed small slider', 'boxed_small_slider', '{"title":"boxed small slider","alias":"boxed_small_slider","source_type":"gallery","post_types":"product","post_category":"category_65","post_sortby":"ID","prd_img_width":"880","prd_img_height":"345","posts_sort_direction":"DESC","max_slider_posts":"30","excerpt_limit":"55","slider_template_id":"","posts_list":"","slider_type":"fullwidth","fullscreen_offset_container":"","fullscreen_offset_size":"","fullscreen_min_height":"","full_screen_align_force":"off","auto_height":"off","force_full_width":"off","min_height":"0","width":"847","height":"388","responsitive_w1":"940","responsitive_sw1":"770","responsitive_w2":"780","responsitive_sw2":"500","responsitive_w3":"510","responsitive_sw3":"310","responsitive_w4":"0","responsitive_sw4":"0","responsitive_w5":"0","responsitive_sw5":"0","responsitive_w6":"0","responsitive_sw6":"0","delay":"9000","shuffle":"off","lazy_load":"off","use_wpml":"off","enable_static_layers":"off","next_slide_on_window_focus":"off","simplify_ie8_ios4":"off","stop_slider":"off","stop_after_loops":0,"stop_at_slide":2,"show_timerbar":"hide","loop_slide":"loop","position":"center","margin_top":0,"margin_bottom":40,"margin_left":0,"margin_right":0,"shadow_type":"0","padding":0,"background_color":"#E9E9E9","background_dotted_overlay":"none","show_background_image":"false","background_image":"","bg_fit":"cover","bg_repeat":"no-repeat","bg_position":"center top","stop_on_hover":"on","keyboard_navigation":"off","navigation_style":"custom","navigaion_type":"none","navigation_arrows":"solo","navigaion_always_on":"false","hide_thumbs":200,"navigaion_align_hor":"center","navigaion_align_vert":"bottom","navigaion_offset_hor":"0","navigaion_offset_vert":20,"leftarrow_align_hor":"left","leftarrow_align_vert":"center","leftarrow_offset_hor":20,"leftarrow_offset_vert":0,"rightarrow_align_hor":"right","rightarrow_align_vert":"center","rightarrow_offset_hor":20,"rightarrow_offset_vert":0,"thumb_width":100,"thumb_height":50,"thumb_amount":5,"use_spinner":"0","spinner_color":"#FFFFFF","use_parallax":"off","disable_parallax_mobile":"off","parallax_type":"mouse","parallax_bg_freeze":"off","parallax_level_1":"5","parallax_level_2":"10","parallax_level_3":"15","parallax_level_4":"20","parallax_level_5":"25","parallax_level_6":"30","parallax_level_7":"35","parallax_level_8":"40","parallax_level_9":"45","parallax_level_10":"50","touchenabled":"on","swipe_velocity":75,"swipe_min_touches":1,"drag_block_vertical":"false","disable_on_mobile":"off","disable_kenburns_on_mobile":"off","hide_slider_under":0,"hide_defined_layers_under":0,"hide_all_layers_under":0,"hide_arrows_on_mobile":"off","hide_bullets_on_mobile":"off","hide_thumbs_on_mobile":"off","hide_thumbs_under_resolution":0,"hide_thumbs_delay_mobile":1500,"start_with_slide":"1","first_transition_active":"false","first_transition_type":"fade","first_transition_duration":300,"first_transition_slot_amount":7,"reset_transitions":"","reset_transition_duration":0,"0":"Execute settings on all slides","jquery_noconflict":"off","js_to_body":"false","output_type":"none","custom_css":"","custom_javascript":"","template":"false"}');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_slides`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_slides` (
+  `id` int(9) NOT NULL,
+  `slider_id` int(9) NOT NULL,
+  `slide_order` int(11) NOT NULL,
+  `params` text NOT NULL,
+  `layers` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `oc_revslider_slides`
+--
+
+INSERT INTO `oc_revslider_slides` (`id`, `slider_id`, `slide_order`, `params`, `layers`) VALUES
+(1, 1, 2, '{"background_type":"image","image":"http:\\/\\/velikorodnov.com\\/opencart\\/shopme\\/demo1\\/image\\/catalog\\/revslider_media_folder\\/home_slide_4.jpg","title":"Slide","state":"published","date_from":"","date_to":"","slide_transition":"fade","0":"Remove","slot_amount":7,"transition_rotation":0,"transition_duration":300,"delay":"","save_performance":"off","enable_link":"false","link_type":"regular","link":"","link_open_in":"same","slide_link":"nothing","link_pos":"front","slide_thumb":"","class_attr":"","id_attr":"","attr_attr":"","data_attr":"","slide_bg_color":"#E7E7E7","slide_bg_external":"","bg_fit":"contain","bg_fit_x":"100","bg_fit_y":"100","bg_repeat":"no-repeat","bg_position":"center top","bg_position_x":"0","bg_position_y":"0","bg_end_position_x":"0","bg_end_position_y":"0","bg_end_position":"center top","kenburn_effect":"off","kb_start_fit":"100","kb_end_fit":"100","kb_duration":"9000","kb_easing":"Linear.easeNone","0":"Remove"}', '[{"text":"<b>Best Quality<\\/b>","type":"text","left":60,"top":93,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","speed":800,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_md_main","time":600,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":263,"height":48,"serial":"0","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8700,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":"","static_end":"1","static_start":"1"},{"text":"Medications","type":"text","left":60,"top":140,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","speed":800,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_md_light_dark","time":900,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":259,"height":48,"serial":"1","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8350,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":"","static_end":"1","static_start":"1"},{"text":"<b>At low prices<\\/b>","type":"text","left":60,"top":190,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","speed":800,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_xs_main","time":1200,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":233,"height":40,"serial":"2","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8350,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":"","static_end":"2","static_start":"1"},{"text":"<a href=''#'' class=''tp-button blue small''>Shop Now!<\\/a>","type":"text","left":60,"top":245,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfb","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","speed":800,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_sm_main","time":1500,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":118,"height":50,"serial":"3","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8700,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":"","static_start":"1","static_end":"1"}]'),
+(2, 1, 1, '{"background_type":"image","title":"Slide","state":"published","date_from":"","date_to":"","slide_transition":"fade","0":"Remove","slot_amount":7,"transition_rotation":0,"transition_duration":300,"delay":"","save_performance":"off","enable_link":"false","link_type":"regular","link":"","link_open_in":"same","slide_link":"nothing","link_pos":"front","slide_thumb":"","class_attr":"","id_attr":"","attr_attr":"","data_attr":"","slide_bg_color":"#E7E7E7","slide_bg_external":"","bg_fit":"contain","bg_fit_x":"100","bg_fit_y":"100","bg_repeat":"no-repeat","bg_position":"center top","bg_position_x":"0","bg_position_y":"0","bg_end_position_x":"0","bg_end_position_y":"0","bg_end_position":"center top","kenburn_effect":"off","kb_start_fit":"100","kb_end_fit":"100","kb_duration":"9000","kb_easing":"Linear.easeNone","image":"http:\\/\\/velikorodnov.com\\/opencart\\/shopme\\/demo1\\/image\\/catalog\\/revslider_media_folder\\/home_slide_5.jpg","0":"Remove"}', '[{"text":"HAVE A QUESTION?","type":"text","left":285,"top":59,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","static_start":"1","static_end":"2","speed":600,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_xs_light_white","time":800,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":264,"height":40,"serial":"0","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8500,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":""},{"text":"<b>Our Pharmacists<\\/b>","type":"text","left":236,"top":125,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","static_start":"1","static_end":"2","speed":600,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_md_light_white","time":1000,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":361,"height":48,"serial":"1","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8200,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":""},{"text":"<b>Are Ready To Help You!<\\/b>","type":"text","left":172,"top":175,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfl","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","static_start":"1","static_end":"2","speed":600,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_md_light_white","time":1200,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":501,"height":48,"serial":"2","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8200,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":""},{"text":"<a href=''#'' class=''tp-button blue small''>Contact Us Now!<\\/a>","type":"text","left":347,"top":238,"loop_animation":"none","loop_easing":"Power3.easeInOut","loop_speed":"2","loop_startdeg":"-20","loop_enddeg":"20","loop_xorigin":"50","loop_yorigin":"50","loop_xstart":"0","loop_xend":"0","loop_ystart":"0","loop_yend":"0","loop_zoomstart":"1","loop_zoomend":"1","loop_angle":"0","loop_radius":"10","animation":"sfb","easing":"easeOutBack","split":"none","endsplit":"none","splitdelay":"10","endsplitdelay":"10","max_height":"auto","max_width":"auto","2d_rotation":"0","2d_origin_x":"50","2d_origin_y":"50","parallax_level":"-","whitespace":"nowrap","static_start":"1","static_end":"2","speed":600,"align_hor":"left","align_vert":"top","hiddenunder":false,"resizeme":true,"link":"","link_open_in":"same","link_slide":"nothing","scrollunder_offset":"","style":"heading_md_light_white","time":1400,"endtime":"8700","endspeed":300,"endanimation":"auto","endeasing":"nothing","corner_left":"nothing","corner_right":"nothing","width":160,"height":61,"serial":"3","endTimeFinal":8700,"endSpeedFinal":300,"realEndTime":9000,"timeLast":8200,"endWithSlide":true,"alt":"","scaleX":"","scaleY":"","scaleProportional":false,"attrID":"","attrClasses":"","attrTitle":"","attrRel":"","link_id":"","link_class":"","link_title":"","link_rel":""}]');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_revslider_static_slides`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_revslider_static_slides` (
+  `id` int(9) NOT NULL,
+  `slider_id` int(9) NOT NULL,
+  `params` text NOT NULL,
+  `layers` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `oc_setting`
 --
 
@@ -3045,7 +3557,7 @@ CREATE TABLE IF NOT EXISTS `oc_setting` (
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=296 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11334 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `oc_setting`
@@ -3081,128 +3593,307 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `ser
 (146, 0, 'category', 'category_status', '1', 0),
 (158, 0, 'account', 'account_status', '1', 0),
 (159, 0, 'affiliate', 'affiliate_status', '1', 0),
-(267, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(266, 0, 'config', 'config_shared', '0', 0),
-(265, 0, 'config', 'config_secure', '0', 0),
+(11330, 0, 'config', 'config_meta_keyword', '', 0),
+(11329, 0, 'config', 'config_meta_description', 'Мой Магазин', 0),
+(11328, 0, 'config', 'config_meta_title', 'Мой Магазин', 0),
+(11314, 0, 'config', 'config_error_display', '1', 0),
+(11315, 0, 'config', 'config_error_log', '1', 0),
+(11316, 0, 'config', 'config_error_filename', 'error.log', 0),
+(11317, 0, 'config', 'config_google_captcha_public', '', 0),
+(11318, 0, 'config', 'config_google_captcha_secret', '', 0),
+(11319, 0, 'config', 'config_google_captcha_status', '0', 0),
+(11320, 0, 'config', 'config_sms_alert', '0', 0),
+(11321, 0, 'config', 'config_sms_gatename', 'testsms', 0),
+(11322, 0, 'config', 'config_sms_from', '', 0),
+(11323, 0, 'config', 'config_sms_to', '', 0),
+(11324, 0, 'config', 'config_sms_copy', '', 0),
+(11325, 0, 'config', 'config_sms_message', '', 0),
+(11326, 0, 'config', 'config_sms_gate_username', '', 0),
+(11327, 0, 'config', 'config_sms_gate_password', '', 0),
+(11311, 0, 'config', 'config_file_max_size', '300000', 0),
+(11312, 0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
+(11313, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
 (94, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (95, 0, 'voucher', 'voucher_status', '1', 0),
-(261, 0, 'config', 'config_fraud_detection', '0', 0),
-(260, 0, 'config', 'config_mail_alert', '', 0),
 (103, 0, 'free_checkout', 'free_checkout_status', '1', 0),
 (104, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
-(258, 0, 'config', 'config_ftp_status', '0', 0),
-(257, 0, 'config', 'config_ftp_root', '', 0),
-(256, 0, 'config', 'config_ftp_password', '', 0),
-(255, 0, 'config', 'config_ftp_username', '', 0),
-(254, 0, 'config', 'config_ftp_port', '21', 0),
-(253, 0, 'config', 'config_ftp_hostname', '', 0),
-(252, 0, 'config', 'config_image_location_height', '50', 0),
-(251, 0, 'config', 'config_image_location_width', '268', 0),
-(250, 0, 'config', 'config_image_cart_height', '47', 0),
-(249, 0, 'config', 'config_image_cart_width', '47', 0),
-(248, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(181, 0, 'config', 'config_meta_title', 'Мой Магазин', 0),
-(182, 0, 'config', 'config_meta_description', 'Мой Магазин', 0),
-(183, 0, 'config', 'config_meta_keyword', '', 0),
-(184, 0, 'config', 'config_template', 'default', 0),
-(185, 0, 'config', 'config_layout_id', '4', 0),
-(186, 0, 'config', 'config_country_id', '176', 0),
-(187, 0, 'config', 'config_zone_id', '2761', 0),
-(188, 0, 'config', 'config_language', 'ru', 0),
-(189, 0, 'config', 'config_admin_language', 'ru', 0),
-(190, 0, 'config', 'config_currency', 'RUB', 0),
-(191, 0, 'config', 'config_currency_auto', '1', 0),
-(192, 0, 'config', 'config_length_class_id', '1', 0),
-(193, 0, 'config', 'config_weight_class_id', '1', 0),
-(194, 0, 'config', 'config_product_count', '1', 0),
-(195, 0, 'config', 'config_product_limit', '15', 0),
-(196, 0, 'config', 'config_product_description_length', '100', 0),
-(197, 0, 'config', 'config_limit_admin', '20', 0),
-(198, 0, 'config', 'config_review_status', '1', 0),
-(199, 0, 'config', 'config_review_guest', '1', 0),
-(200, 0, 'config', 'config_review_mail', '0', 0),
-(201, 0, 'config', 'config_voucher_min', '1', 0),
-(202, 0, 'config', 'config_voucher_max', '1000', 0),
-(203, 0, 'config', 'config_tax', '1', 0),
-(204, 0, 'config', 'config_tax_default', 'shipping', 0),
-(205, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(206, 0, 'config', 'config_customer_online', '0', 0),
-(207, 0, 'config', 'config_customer_group_id', '1', 0),
-(208, 0, 'config', 'config_customer_group_display', '["1"]', 1),
-(209, 0, 'config', 'config_customer_price', '0', 0),
-(210, 0, 'config', 'config_account_id', '3', 0),
-(211, 0, 'config', 'config_account_mail', '0', 0),
-(212, 0, 'config', 'config_invoice_prefix', 'INV-2016-00', 0),
-(295, 0, 'config', 'config_api_id', '1', 0),
-(214, 0, 'config', 'config_cart_weight', '1', 0),
-(215, 0, 'config', 'config_checkout_guest', '1', 0),
-(216, 0, 'config', 'config_checkout_id', '5', 0),
-(217, 0, 'config', 'config_order_status_id', '1', 0),
-(218, 0, 'config', 'config_processing_status', '["5","1","2","12","3"]', 1),
-(219, 0, 'config', 'config_complete_status', '["5","3"]', 1),
-(220, 0, 'config', 'config_order_mail', '0', 0),
-(221, 0, 'config', 'config_stock_display', '0', 0),
-(222, 0, 'config', 'config_stock_warning', '0', 0),
-(223, 0, 'config', 'config_stock_checkout', '0', 0),
-(224, 0, 'config', 'config_affiliate_approval', '0', 0),
-(225, 0, 'config', 'config_affiliate_auto', '0', 0),
-(226, 0, 'config', 'config_affiliate_commission', '5', 0),
-(227, 0, 'config', 'config_affiliate_id', '4', 0),
-(228, 0, 'config', 'config_affiliate_mail', '0', 0),
-(229, 0, 'config', 'config_return_id', '0', 0),
-(230, 0, 'config', 'config_return_status_id', '2', 0),
-(231, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
-(232, 0, 'config', 'config_icon', 'catalog/cart.png', 0),
-(233, 0, 'config', 'config_image_category_width', '80', 0),
-(234, 0, 'config', 'config_image_category_height', '80', 0),
-(235, 0, 'config', 'config_image_thumb_width', '228', 0),
-(236, 0, 'config', 'config_image_thumb_height', '228', 0),
-(237, 0, 'config', 'config_image_popup_width', '500', 0),
-(238, 0, 'config', 'config_image_popup_height', '500', 0),
-(239, 0, 'config', 'config_image_product_width', '228', 0),
-(240, 0, 'config', 'config_image_product_height', '228', 0),
-(241, 0, 'config', 'config_image_additional_width', '74', 0),
-(242, 0, 'config', 'config_image_additional_height', '74', 0),
-(243, 0, 'config', 'config_image_related_width', '80', 0),
-(244, 0, 'config', 'config_image_related_height', '80', 0),
-(245, 0, 'config', 'config_image_compare_width', '90', 0),
-(246, 0, 'config', 'config_image_compare_height', '90', 0),
-(247, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(180, 0, 'config', 'config_comment', '', 0),
-(179, 0, 'config', 'config_open', '', 0),
-(178, 0, 'config', 'config_image', '', 0),
-(177, 0, 'config', 'config_fax', '', 0),
-(176, 0, 'config', 'config_telephone', '123456789', 0),
-(292, 0, 'config', 'config_email', 'test@gmail.com', 0),
-(174, 0, 'config', 'config_geocode', '54.718681,20.499113', 0),
-(172, 0, 'config', 'config_owner', 'Мое Имя', 0),
-(173, 0, 'config', 'config_address', 'Адрес', 0),
-(171, 0, 'config', 'config_name', 'Мой Магазин', 0),
-(268, 0, 'config', 'config_seo_url', '0', 0),
-(269, 0, 'config', 'config_file_max_size', '300000', 0),
-(270, 0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
-(271, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
-(272, 0, 'config', 'config_maintenance', '0', 0),
-(273, 0, 'config', 'config_password', '1', 0),
-(294, 0, 'config', 'config_encryption', 'IpCMz7NyzBwVoKjBk8LCAtxElEdGxoscAbprcBUncqGX9SD4oylnVy9NA9dukFYTVpnsAuikNbDtgJ7x1Zca4sIF1WAUGkzPC74Vblewy8fWz8p3hxmw48JqsK5u9XcXhnqjhDRYr6Bvk5czOn6LzFdR97AnWWKphXGzabirK4aLt9IvIcatfwDIO3u8AQOT4TXmkefYMyozPmqsuAMGbRfVjQh1V7U6HfpxtgrFvQGXHnpVjesF0c1RigVafBTeuMhkJiq6qkc32ths9Hw4SYriWKDwGI3BDvGlnMXzxMNKlbtUH40lVePdLTexzPE74lgksYW6zXqNssDvBmTtx1q5OpLyybiGURWzsRHLVmYVa742zxeqRtguQVhTrCdsEhmVTFpXtGU6rqjYB6kwd00y7bwXC26VCTQE3HxkFgLOBxUwZ3WlStHrWZ6s6mNDTmkCVI0kRXFPerrsUQZatr0gCq1dKGgl5z4tfMta2pegZwrSrgR9p7T3usEH6Zj4mv4N1ZPbl5sQmCq66XW4C9QOTES2RPTxQzGQRLmbIdtegOTzYX0s6K8ppcXryaWKw3sBmZjqvETdiOXWtBJUVIhGVNznybowqwc1wFgVqPrcd1Sf0xyCmHvbl2iteF7W933CHt3t82GHtw103TSCggVCcAADHA4Ck2Cf5okbmzHACOTI9N2UssKOjU7k5sFLCLLluZ0xkElabIYINrXP2OflxY1dPVImmDspmp2O6dSnIbXoZIhrOVyjWYcht0RmqEIv1QjZM7V1KVAhAFLxW8QwbgGMaA5JGBe2ETwKqz9qvumgqDexmzSmGCcEj8PfG7uobJ2pCIKz7WlFn4Cc0b7u3PQaZs8tZYVKVa6IpUueHkuMjw0w8VgLTeVc56EwF9mGaoa9PiCQ5Mb5O0A7OfKTVMmKtagzi7pLvTQ1CIq7tlhIFyG8vWlSbKB74Eyk5qVKFjz5uu08rqKnsjDIMZ77c54hDYpgFh5lF3OFGmJBvfos0EzvlTCEyWA2ybYx', 0),
-(275, 0, 'config', 'config_compression', '0', 0),
-(276, 0, 'config', 'config_error_display', '1', 0),
-(277, 0, 'config', 'config_error_log', '1', 0),
-(278, 0, 'config', 'config_error_filename', 'error.log', 0),
-(279, 0, 'config', 'config_google_analytics', '', 0),
-(280, 0, 'config', 'config_mail_protocol', 'mail', 0),
-(281, 0, 'config', 'config_mail_parameter', '', 0),
-(282, 0, 'config', 'config_mail_smtp_hostname', '', 0),
-(283, 0, 'config', 'config_mail_smtp_username', '', 0),
-(284, 0, 'config', 'config_mail_smtp_password', '', 0),
-(285, 0, 'config', 'config_mail_smtp_port', '25', 0),
-(286, 0, 'config', 'config_mail_smtp_timeout', '5', 0),
-(287, 0, 'config', 'config_captcha', 'basic_captcha', 0),
-(288, 0, 'config', 'config_captcha_page', '["review","return","contact"]', 1),
-(289, 0, 'config', 'config_login_attempts', '5', 0),
-(290, 0, 'config', 'config_mail_regexp', '/^[^@]+@.*.[a-z]{2,15}$/i', 0),
-(291, 0, 'config', 'config_langdata', '{"1":{"meta_title":"Мой Магазин","meta_description":"Мой Магазин","meta_keyword":"","name":"Мой Магазин","owner":"Мое Имя","address":"Адрес","open":"с 10ч до 18ч\\r\\nобед с 14ч до 15ч\\r\\nвоскресенье - выходной","comment":""},"2":{"meta_title":"Your Store","meta_description":"My Store","meta_keyword":"","name":"Your Store","owner":"Your Name","address":"Address 1","open":"","comment":""}}', 1),
-(293, 0, 'config', 'config_url', 'http://shopoc/', 0);
+(11304, 0, 'config', 'config_compression', '0', 0),
+(11305, 0, 'config', 'config_mail_regexp', '/^[^@]+@.*.[a-z]{2,15}$/i', 0),
+(11306, 0, 'config', 'config_editor_default', '0', 0),
+(11307, 0, 'config', 'config_secure', '0', 0),
+(11308, 0, 'config', 'config_password', '1', 0),
+(11309, 0, 'config', 'config_shared', '0', 0),
+(11310, 0, 'config', 'config_encryption', 'IpCMz7NyzBwVoKjBk8LCAtxElEdGxoscAbprcBUncqGX9SD4oylnVy9NA9dukFYTVpnsAuikNbDtgJ7x1Zca4sIF1WAUGkzPC74Vblewy8fWz8p3hxmw48JqsK5u9XcXhnqjhDRYr6Bvk5czOn6LzFdR97AnWWKphXGzabirK4aLt9IvIcatfwDIO3u8AQOT4TXmkefYMyozPmqsuAMGbRfVjQh1V7U6HfpxtgrFvQGXHnpVjesF0c1RigVafBTeuMhkJiq6qkc32ths9Hw4SYriWKDwGI3BDvGlnMXzxMNKlbtUH40lVePdLTexzPE74lgksYW6zXqNssDvBmTtx1q5OpLyybiGURWzsRHLVmYVa742zxeqRtguQVhTrCdsEhmVTFpXtGU6rqjYB6kwd00y7bwXC26VCTQE3HxkFgLOBxUwZ3WlStHrWZ6s6mNDTmkCVI0kRXFPerrsUQZatr0gCq1dKGgl5z4tfMta2pegZwrSrgR9p7T3usEH6Zj4mv4N1ZPbl5sQmCq66XW4C9QOTES2RPTxQzGQRLmbIdtegOTzYX0s6K8ppcXryaWKw3sBmZjqvETdiOXWtBJUVIhGVNznybowqwc1wFgVqPrcd1Sf0xyCmHvbl2iteF7W933CHt3t82GHtw103TSCggVCcAADHA4Ck2Cf5okbmzHACOTI9N2UssKOjU7k5sFLCLLluZ0xkElabIYINrXP2OflxY1dPVImmDspmp2O6dSnIbXoZIhrOVyjWYcht0RmqEIv1QjZM7V1KVAhAFLxW8QwbgGMaA5JGBe2ETwKqz9qvumgqDexmzSmGCcEj8PfG7uobJ2pCIKz7WlFn4Cc0b7u3PQaZs8tZYVKVa6IpUueHkuMjw0w8VgLTeVc56EwF9mGaoa9PiCQ5Mb5O0A7OfKTVMmKtagzi7pLvTQ1CIq7tlhIFyG8vWlSbKB74Eyk5qVKFjz5uu08rqKnsjDIMZ77c54hDYpgFh5lF3OFGmJBvfos0EzvlTCEyWA2ybYx', 0),
+(11303, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
+(11302, 0, 'config', 'config_seo_url_postfix', '.html', 0),
+(11300, 0, 'config', 'config_seo_url_type', 'seo_pro', 0),
+(11301, 0, 'config', 'config_seo_url_include_path', '1', 0),
+(11299, 0, 'config', 'config_seo_url', '1', 0),
+(11298, 0, 'config', 'config_maintenance', '0', 0),
+(11297, 0, 'config', 'config_mail_alert', '', 0),
+(11296, 0, 'config', 'config_mail_smtp_timeout', '5', 0),
+(11295, 0, 'config', 'config_mail_smtp_port', '25', 0),
+(11294, 0, 'config', 'config_mail_smtp_password', '', 0),
+(11293, 0, 'config', 'config_mail_smtp_username', '', 0),
+(11292, 0, 'config', 'config_mail_smtp_hostname', '', 0),
+(11291, 0, 'config', 'config_mail_parameter', '', 0),
+(11290, 0, 'config', 'config_mail_protocol', 'mail', 0),
+(11289, 0, 'config', 'config_ftp_status', '0', 0),
+(11288, 0, 'config', 'config_ftp_root', '', 0),
+(11287, 0, 'config', 'config_ftp_password', '', 0),
+(11286, 0, 'config', 'config_ftp_username', '', 0),
+(11285, 0, 'config', 'config_ftp_port', '21', 0),
+(11284, 0, 'config', 'config_ftp_hostname', 'shopoc', 0),
+(11283, 0, 'config', 'config_image_location_height', '50', 0),
+(11282, 0, 'config', 'config_image_location_width', '268', 0),
+(11281, 0, 'config', 'config_image_cart_height', '90', 0),
+(11280, 0, 'config', 'config_image_cart_width', '90', 0),
+(11279, 0, 'config', 'config_image_wishlist_height', '100', 0),
+(11278, 0, 'config', 'config_image_wishlist_width', '100', 0),
+(11277, 0, 'config', 'config_image_compare_height', '100', 0),
+(11276, 0, 'config', 'config_image_compare_width', '100', 0),
+(11275, 0, 'config', 'config_image_related_height', '262', 0),
+(11274, 0, 'config', 'config_image_related_width', '262', 0),
+(11273, 0, 'config', 'config_image_additional_height', '83', 0),
+(11272, 0, 'config', 'config_image_additional_width', '83', 0),
+(11270, 0, 'config', 'config_image_product_width', '262', 0),
+(11271, 0, 'config', 'config_image_product_height', '262', 0),
+(11269, 0, 'config', 'config_image_popup_height', '750', 0),
+(11268, 0, 'config', 'config_image_popup_width', '750', 0),
+(11267, 0, 'config', 'config_image_thumb_height', '360', 0),
+(11266, 0, 'config', 'config_image_thumb_width', '360', 0),
+(11264, 0, 'config', 'config_image_category_width', '848', 0),
+(11265, 0, 'config', 'config_image_category_height', '388', 0),
+(11263, 0, 'config', 'config_icon', 'catalog/cart.png', 0),
+(11262, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
+(11261, 0, 'config', 'config_captcha_page', '["review","return","contact"]', 1),
+(11260, 0, 'config', 'config_captcha', '', 0),
+(11259, 0, 'config', 'config_return_status_id', '2', 0),
+(11244, 0, 'config', 'config_order_status_id', '1', 0),
+(11245, 0, 'config', 'config_processing_status', '["2","3","1","12","5"]', 1),
+(11258, 0, 'config', 'config_return_id', '0', 0),
+(11257, 0, 'config', 'config_affiliate_mail', '0', 0),
+(11256, 0, 'config', 'config_affiliate_id', '4', 0),
+(11255, 0, 'config', 'config_affiliate_commission', '5', 0),
+(11254, 0, 'config', 'config_affiliate_auto', '0', 0),
+(11253, 0, 'config', 'config_affiliate_approval', '0', 0),
+(11252, 0, 'config', 'config_stock_checkout', '0', 0),
+(11251, 0, 'config', 'config_stock_warning', '0', 0),
+(11250, 0, 'config', 'config_stock_display', '0', 0),
+(11249, 0, 'config', 'config_api_id', '1', 0),
+(11248, 0, 'config', 'config_order_mail', '0', 0),
+(11247, 0, 'config', 'config_fraud_status_id', '2', 0),
+(11246, 0, 'config', 'config_complete_status', '["3","5"]', 1),
+(11243, 0, 'config', 'config_checkout_id', '5', 0),
+(11242, 0, 'config', 'config_checkout_guest', '1', 0),
+(11241, 0, 'config', 'config_cart_weight', '1', 0),
+(11240, 0, 'config', 'config_invoice_prefix', 'INV-2016-00', 0),
+(11239, 0, 'config', 'config_account_mail', '0', 0),
+(11238, 0, 'config', 'config_account_id', '3', 0),
+(11237, 0, 'config', 'config_login_attempts', '5', 0),
+(11236, 0, 'config', 'config_customer_price', '0', 0),
+(11235, 0, 'config', 'config_customer_group_display', '["1"]', 1),
+(11234, 0, 'config', 'config_customer_group_id', '1', 0),
+(11233, 0, 'config', 'config_customer_online', '0', 0),
+(11232, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(11231, 0, 'config', 'config_tax_default', 'shipping', 0),
+(11230, 0, 'config', 'config_tax', '1', 0),
+(11229, 0, 'config', 'config_voucher_max', '1000', 0),
+(11228, 0, 'config', 'config_voucher_min', '1', 0),
+(11227, 0, 'config', 'config_review_mail', '0', 0),
+(11226, 0, 'config', 'config_review_guest', '1', 0),
+(11225, 0, 'config', 'config_review_status', '1', 0),
+(11224, 0, 'config', 'config_product_mpn_hide', '0', 0),
+(11223, 0, 'config', 'config_product_isbn_hide', '0', 0),
+(11222, 0, 'config', 'config_product_jan_hide', '0', 0),
+(11221, 0, 'config', 'config_product_ean_hide', '0', 0),
+(11220, 0, 'config', 'config_product_upc_hide', '0', 0),
+(11219, 0, 'config', 'config_limit_admin', '20', 0),
+(11218, 0, 'config', 'config_product_description_length', '100', 0),
+(11217, 0, 'config', 'config_product_limit', '15', 0),
+(11216, 0, 'config', 'config_product_count', '1', 0),
+(11215, 0, 'config', 'config_weight_class_id', '1', 0),
+(11214, 0, 'config', 'config_length_class_id', '1', 0),
+(11201, 0, 'config', 'config_template', 'shopme', 0),
+(11202, 0, 'config', 'config_layout_id', '4', 0),
+(11203, 0, 'config', 'config_geocode', '54.718681,20.499113', 0),
+(11204, 0, 'config', 'config_email', 'test@gmail.com', 0),
+(11205, 0, 'config', 'config_telephone', '123456789', 0),
+(11206, 0, 'config', 'config_fax', '', 0),
+(11207, 0, 'config', 'config_image', '', 0),
+(11208, 0, 'config', 'config_country_id', '176', 0),
+(11209, 0, 'config', 'config_zone_id', '2761', 0),
+(11210, 0, 'config', 'config_language', 'ru', 0),
+(11211, 0, 'config', 'config_admin_language', 'ru', 0),
+(11212, 0, 'config', 'config_currency', 'RUB', 0),
+(11213, 0, 'config', 'config_currency_auto', '1', 0),
+(11200, 0, 'config', 'config_langdata', '{"1":{"meta_title":"\\u041c\\u043e\\u0439 \\u041c\\u0430\\u0433\\u0430\\u0437\\u0438\\u043d","meta_description":"\\u041c\\u043e\\u0439 \\u041c\\u0430\\u0433\\u0430\\u0437\\u0438\\u043d","meta_keyword":"","name":"\\u041c\\u043e\\u0439 \\u041c\\u0430\\u0433\\u0430\\u0437\\u0438\\u043d","owner":"\\u041c\\u043e\\u0435 \\u0418\\u043c\\u044f","address":"\\u0410\\u0434\\u0440\\u0435\\u0441","open":"\\u0441 10\\u0447 \\u0434\\u043e 18\\u0447\\r\\n\\u043e\\u0431\\u0435\\u0434 \\u0441 14\\u0447 \\u0434\\u043e 15\\u0447\\r\\n\\u0432\\u043e\\u0441\\u043a\\u0440\\u0435\\u0441\\u0435\\u043d\\u044c\\u0435 - \\u0432\\u044b\\u0445\\u043e\\u0434\\u043d\\u043e\\u0439","comment":""},"2":{"meta_title":"Your Store","meta_description":"My Store","meta_keyword":"","name":"Your Store","owner":"Your Name","address":"Address 1","open":"","comment":""}}', 1),
+(8799, 0, 'theme_default', 'theme_default_image_location_height', '50', 0),
+(8798, 0, 'theme_default', 'theme_default_image_location_width', '268', 0),
+(8797, 0, 'theme_default', 'theme_default_image_cart_height', '90', 0),
+(8796, 0, 'theme_default', 'theme_default_image_cart_width', '90', 0),
+(8795, 0, 'theme_default', 'theme_default_image_wishlist_height', '100', 0),
+(8794, 0, 'theme_default', 'theme_default_image_wishlist_width', '100', 0),
+(8793, 0, 'theme_default', 'theme_default_image_compare_height', '100', 0),
+(8792, 0, 'theme_default', 'theme_default_image_compare_width', '100', 0),
+(8791, 0, 'theme_default', 'theme_default_image_related_height', '262', 0),
+(8790, 0, 'theme_default', 'theme_default_image_related_width', '262', 0),
+(8789, 0, 'theme_default', 'theme_default_image_additional_height', '83', 0),
+(8788, 0, 'theme_default', 'theme_default_image_additional_width', '83', 0),
+(8787, 0, 'theme_default', 'theme_default_image_product_height', '262', 0),
+(8786, 0, 'theme_default', 'theme_default_image_product_width', '262', 0),
+(8785, 0, 'theme_default', 'theme_default_image_popup_height', '750', 0),
+(8784, 0, 'theme_default', 'theme_default_image_popup_width', '750', 0),
+(8783, 0, 'theme_default', 'theme_default_image_thumb_height', '360', 0),
+(8781, 0, 'theme_default', 'theme_default_image_category_height', '388', 0),
+(8782, 0, 'theme_default', 'theme_default_image_thumb_width', '360', 0),
+(8780, 0, 'theme_default', 'theme_default_image_category_width', '848', 0),
+(11116, 0, 'shopme', 'shopme_header_compare', 'enabled', 0),
+(11115, 0, 'shopme', 'shopme_header_wishlist', 'enabled', 0),
+(11114, 0, 'shopme', 'shopme_header_login', 'enabled', 0),
+(11113, 0, 'shopme', 'shopme_header_style', 'header6', 0),
+(11112, 0, 'shopme', 'shopme_use_retina', '', 0),
+(11120, 0, 'shopme', 'shopme_menu_sticky', 'sticky_menu', 0),
+(11119, 0, 'shopme', 'shopme_menu_type', 'default', 0),
+(11118, 0, 'shopme', 'shopme_header_cart', 'enabled', 0),
+(11117, 0, 'shopme', 'shopme_header_search', 'enabled', 0),
+(11160, 0, 'shopme', 'shopme_ie_text', '{"en":"","se":"","1":"","2":""}', 1),
+(11167, 0, 'shopme', 'shopme_custom_bg_icon', '', 0),
+(11166, 0, 'shopme', 'shopme_body_image', 'none.png', 0),
+(11165, 0, 'shopme', 'shopme_body_background', '', 0),
+(11168, 0, 'shopme', 'shopme_top_border_background', '', 0),
+(11169, 0, 'shopme', 'shopme_top_border_border', '', 0),
+(11170, 0, 'shopme', 'shopme_top_border_text', '', 0),
+(11171, 0, 'shopme', 'shopme_top_border_link', '', 0),
+(11172, 0, 'shopme', 'shopme_top_border_link_hover', '', 0),
+(11174, 0, 'shopme', 'shopme_menu_link_color', '', 0),
+(11023, 0, 'shopme_twitterfeed', 'shopme_twitterfeed_status', '1', 0),
+(11122, 0, 'shopme', 'shopme_sections', '{"1":{"title":{"1":"Home","2":"Home"},"href":"#"},"2":{"title":{"1":"My Account","2":"My Account"},"href":"index.php?route=account\\/account"},"3":{"title":{"1":"Shopping Cart","2":"Shopping Cart"},"href":"index.php?route=checkout\\/cart"},"4":{"title":{"1":"Checkout","2":"Checkout"},"href":"index.php?route=checkout\\/checkout"},"5":{"title":{"1":"Blog","2":"Blog"},"href":"index.php?route=blog\\/home"},"6":{"title":{"1":"Contact","2":"Contact"},"href":"index.php?route=information\\/contact"}}', 1),
+(11020, 0, 'shopme_twitterfeed', 'shopme_twitterfeed_button_title', '{"en":"Follow Us","1":"Follow Us","2":"Follow Us"}', 1),
+(11121, 0, 'shopme', 'shopme_top_promo_message', '{"en":"Call us toll free: &lt;span&gt;+1888 234 5678&lt;\\/span&gt;","1":"Call us toll free: &lt;span&gt;+1888 234 5678&lt;\\/span&gt;","2":"Call us toll free: &lt;span&gt;+1888 234 5678&lt;\\/span&gt;"}', 1),
+(11126, 0, 'shopme', 'shopme_product_countdown', 'header_border', 0),
+(11124, 0, 'shopme', 'shopme_product_meta', '1', 0),
+(11125, 0, 'shopme', 'shopme_product_yousave', 'enabled', 0),
+(11123, 0, 'shopme', 'shopme_product_share', 'image', 0),
+(11130, 0, 'shopme', 'shopme_category_thumb', '0', 0),
+(11131, 0, 'shopme', 'shopme_category_refine', '', 0),
+(11135, 0, 'shopme', 'shopme_brands_per_row', 'grid4', 0),
+(11134, 0, 'shopme', 'shopme_refine_image_h', '150', 0),
+(11133, 0, 'shopme', 'shopme_refine_image_w', '150', 0),
+(11132, 0, 'shopme', 'shopme_category_per_row', 'grid6', 0),
+(11136, 0, 'shopme', 'shopme_brands_image_w', '173', 0),
+(11137, 0, 'shopme', 'shopme_brands_image_h', '83', 0),
+(11138, 0, 'shopme', 'shopme_google_map', '&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3151.8351118085707!2d144.955652!3d-37.817330999999996!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1ssv!2sse!4v1431041169446&quot; width=&quot;100%&quot; height=&quot;250&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot;&gt;&lt;/iframe&gt;', 0),
+(11159, 0, 'shopme', 'shopme_use_ie', '0', 0),
+(11127, 0, 'shopme', 'shopme_product_hurry', 'header_border', 0),
+(11128, 0, 'shopme', 'shopme_product_zoom', 'cloud-zoom-gallery', 0),
+(11129, 0, 'shopme', 'shopme_image_options', 'thumbs', 0),
+(11158, 0, 'shopme', 'shopme_cookie_button_accept', '{"en":"Accept Cookies","1":"Accept Cookies","2":"Accept Cookies"}', 1),
+(11157, 0, 'shopme', 'shopme_cookie_button_readmore', '{"en":"Read More","1":"Read More","2":"Read More"}', 1),
+(11156, 0, 'shopme', 'shopme_readmore_url', '#', 0),
+(11155, 0, 'shopme', 'shopme_cookie_text', '{"en":"This website uses cookies in order to work correctly. No personal data is stored","1":"This website uses cookies in order to work correctly. No personal data is stored","2":"This website uses cookies in order to work correctly. No personal data is stored"}', 1),
+(11154, 0, 'shopme', 'shopme_use_cookie', '1', 0),
+(11153, 0, 'shopme', 'shopme_location_widget', '1', 0),
+(11152, 0, 'shopme', 'shopme_contact_widget', '1', 0),
+(11151, 0, 'shopme', 'shopme_twitter_widget', '1', 0),
+(11150, 0, 'shopme', 'shopme_facebook_widget', '1', 0),
+(11149, 0, 'shopme', 'shopme_footer_payment_icon', 'catalog/shopme_samples/payments.jpg', 0),
+(11139, 0, 'shopme', 'shopme_text_ql', '{"1":"Quickview","2":"Quickview"}', 1),
+(11140, 0, 'shopme', 'shopme_default_product_style', 'style-4', 0),
+(11141, 0, 'shopme', 'shopme_default_view', 'grid', 0),
+(11142, 0, 'shopme', 'shopme_grid_category', 'grid3', 0),
+(11143, 0, 'shopme', 'shopme_grid_related', 'grid3', 0),
+(11144, 0, 'shopme', 'shopme_rollover_effect', 'enabled', 0),
+(11145, 0, 'shopme', 'shopme_percentage_sale_badge', 'enabled', 0),
+(11146, 0, 'shopme', 'shopme_countdown', '', 0),
+(11147, 0, 'shopme', 'shopme_footer_columns', 'col-md-3 col-sm-6', 0),
+(11148, 0, 'shopme', 'shopme_footer_custom_block', '{"en":"&lt;p&gt;&lt;img src=&quot;http:\\/\\/velikorodnov.com\\/opencart\\/shopme\\/demo6\\/image\\/catalog\\/logo.png&quot;&gt;&lt;br&gt;&lt;\\/p&gt;&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. &lt;\\/p&gt;&lt;p&gt;Email us: &lt;a href=&quot;mailto:company@companyname.com&quot;&gt;company@company.com&lt;\\/a&gt;&lt;br&gt;&lt;\\/p&gt;","se":"&lt;p&gt;&lt;img src=&quot;http:\\/\\/velikorodnov.com\\/opencart\\/shopme\\/demo6\\/image\\/catalog\\/logo.png&quot;&gt;&lt;br&gt;&lt;\\/p&gt;&lt;p&gt;Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. &lt;\\/p&gt;&lt;p&gt;Email us: &lt;a href=&quot;mailto:company@companyname.com&quot;&gt;company@company.com&lt;\\/a&gt;&lt;br&gt;&lt;\\/p&gt;"}', 1),
+(11164, 0, 'shopme', 'shopme_container_layout', 'full', 0),
+(11163, 0, 'shopme', 'shopme_use_custom', '0', 0),
+(11022, 0, 'shopme_twitterfeed', 'shopme_twitterfeed_limit', '2', 0),
+(11021, 0, 'shopme_twitterfeed', 'shopme_twitterfeed_widget_id', 'Envato', 0),
+(11191, 0, 'shopme', 'shopme_use_custom_font', '0', 0),
+(11199, 0, 'shopme', 'shopme_custom_javascript_content', '', 0),
+(11190, 0, 'shopme', 'shopme_button2_hover_background', '', 0),
+(11180, 0, 'shopme', 'shopme_salebadge_background', '', 0),
+(11181, 0, 'shopme', 'shopme_price_color', '', 0),
+(11183, 0, 'shopme', 'shopme_button_color', '', 0),
+(11182, 0, 'shopme', 'shopme_icons_background_hover', '', 0),
+(11192, 0, 'shopme', 'shopme_font1_import', '', 0),
+(11008, 0, 'shopme_contact', 'shopme_contact_message', '{"en":"Lorem ipsum dolor sit amet, adipis mauris accumsan.","1":"Lorem ipsum dolor sit amet, adipis mauris accumsan.","2":"Lorem ipsum dolor sit amet, adipis mauris accumsan."}', 1),
+(11179, 0, 'shopme', 'shopme_secondary_color', '', 0),
+(11178, 0, 'shopme', 'shopme_primary_color', '', 0),
+(11177, 0, 'shopme', 'shopme_link_hover_color', '', 0),
+(11193, 0, 'shopme', 'shopme_font1_name', '', 0),
+(11194, 0, 'shopme', 'shopme_use_font_regular', '100', 0),
+(11195, 0, 'shopme', 'shopme_use_font_bold', '100', 0),
+(11196, 0, 'shopme', 'shopme_use_custom_css', '0', 0),
+(11197, 0, 'shopme', 'shopme_custom_css_content', '', 0),
+(11198, 0, 'shopme', 'shopme_use_custom_javascript', '0', 0),
+(11189, 0, 'shopme', 'shopme_button2_hover_color', '', 0),
+(11187, 0, 'shopme', 'shopme_button2_color', '', 0),
+(11188, 0, 'shopme', 'shopme_button2_background', '', 0),
+(11186, 0, 'shopme', 'shopme_button_hover_background', '', 0),
+(11184, 0, 'shopme', 'shopme_button_background', '', 0),
+(11185, 0, 'shopme', 'shopme_button_hover_color', '', 0),
+(3312, 0, 'product_question', 'product_question_per_page', '5', 0),
+(3313, 0, 'product_question', 'product_question_notify', '0', 0),
+(11012, 0, 'shopme_facebook', 'shopme_facebook_html', '&lt;div class=&quot;fb-page&quot; data-href=&quot;https://www.facebook.com/envatomarket&quot; data-width=&quot;280&quot; data-height=&quot;320&quot; data-hide-cover=&quot;true&quot; data-show-facepile=&quot;true&quot; data-show-posts=&quot;true&quot;&gt;&lt;div class=&quot;fb-xfbml-parse-ignore&quot;&gt;&lt;blockquote cite=&quot;https://www.facebook.com/envatomarket&quot;&gt;&lt;a href=&quot;https://www.facebook.com/envatomarket&quot;&gt;Envato Market&lt;/a&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;', 0),
+(11010, 0, 'shopme_facebook', 'shopme_facebook_title', '{"en":"Join Us on Facebook","1":"Join Us on Facebook","2":"Join Us on Facebook"}', 1),
+(11011, 0, 'shopme_facebook', 'shopme_facebook_script', '&lt;div id=&quot;fb-root&quot;&gt;&lt;/div&gt;\r\n&lt;script&gt;(function(d, s, id) {\r\n  var js, fjs = d.getElementsByTagName(s)[0];\r\n  if (d.getElementById(id)) return;\r\n  js = d.createElement(s); js.id = id;\r\n  js.src = &quot;//connect.facebook.net/sv_SE/sdk.js#xfbml=1&amp;version=v2.3&amp;appId=109031762530738&quot;;\r\n  fjs.parentNode.insertBefore(js, fjs);\r\n}(document, ''script'', ''facebook-jssdk''));&lt;/script&gt;', 0),
+(11019, 0, 'shopme_twitterfeed', 'shopme_twitterfeed_title', '{"en":"Latest Tweets","1":"Latest Tweets","2":"Latest Tweets"}', 1),
+(11009, 0, 'shopme_contact', 'shopme_contact_status', '1', 0),
+(11007, 0, 'shopme_contact', 'shopme_contact_title', '{"en":"Contact Us","1":"Contact Us","2":"Contact Us"}', 1),
+(11176, 0, 'shopme', 'shopme_menu_link_background_hover', '', 0),
+(11175, 0, 'shopme', 'shopme_shortcut_separator', '', 0),
+(11173, 0, 'shopme', 'shopme_menu_background', '', 0),
+(11018, 0, 'showintabs', 'showintabs_tab', '{"1":{"title":{"1":"Latest","2":"Latest"},"data_source":"PG","product_group":"LA","filter_category":"ALL","filter_manufacturer":"ALL","sort":"pd.name"},"2":{"title":{"1":"Sale","2":"Sale"},"data_source":"PG","product_group":"SP","filter_category":"ALL","filter_manufacturer":"ALL","sort":"pd.name"},"6":{"title":{"1":"Top Rated","2":"Top Rated"},"product_group":"BS","data_source":"CQ","filter_category":"ALL","filter_manufacturer":"ALL","sort":"rating"},"8":{"title":{"1":"Featured","2":"Utvalda"},"product_group":"BS","data_source":"CQ","filter_category":"ALL","filter_manufacturer":"ALL","sort":"p.date_added"},"9":{"title":{"1":"Sample Group","2":"Sample Group"},"product_group":"BS","data_source":"CQ","filter_category":"ALL","filter_manufacturer":"ALL","sort":"pd.name"}}', 1),
+(11161, 0, 'shopme', 'shopme_ie_url', '', 0),
+(11162, 0, 'shopme', 'shopme_ie_update_text', '{"en":"","se":"","1":"","2":""}', 1),
+(3017, 0, 'blogsetting', 'blogsetting_home_title', '{"en":"Blog","se":"Blog","1":"Blog","2":"Blog"}', 1),
+(3039, 0, 'blogsetting', 'blogsetting_rel_thumb', '1', 0),
+(3040, 0, 'blogsetting', 'blogsetting_rel_thumbs_w', '202', 0),
+(3041, 0, 'blogsetting', 'blogsetting_rel_thumbs_h', '128', 0),
+(3042, 0, 'blogsetting', 'blogsetting_rel_characters', '100', 0),
+(3043, 0, 'blogsetting', 'blogsetting_comment_per_page', '5', 0),
+(3044, 0, 'blogsetting', 'blogsetting_comment_approve', '1', 0),
+(3045, 0, 'blogsetting', 'blogsetting_comment_notification', '0', 0),
+(3046, 0, 'blogsetting', 'blogsetting_author_change', '1', 0),
+(3047, 0, 'blog_category', 'blog_category_status', '1', 0),
+(3309, 0, 'product_question', 'product_question_status', '1', 0),
+(3310, 0, 'product_question', 'product_question_default_status', '0', 0),
+(3311, 0, 'product_question', 'product_question_allow_private', '0', 0),
+(3018, 0, 'blogsetting', 'blogsetting_home_page_title', '{"en":"","se":"","1":"","2":""}', 1),
+(3038, 0, 'blogsetting', 'blogsetting_rel_blog_per_row', '2', 0),
+(11013, 0, 'shopme_facebook', 'shopme_facebook_status', '1', 0),
+(1904, 0, 'testimonial', 'testimonial_admin_approved', '0', 0),
+(1905, 0, 'd_ajax_search', 'd_ajax_search', '{"search_on_off":"1","search_width":"100%","search_max_symbols":"50","search_max_results":"4","search_product_on":"on","search_product_sort":"1","search_category_on":"on","search_category_sort":"2","search_manufacturer_on":"on","search_manufacturer_sort":"3","search_information_on":"on","search_information_sort":"4","search_price":"on","search_special":"on","search_tax":"on"}', 1),
+(11016, 0, 'shopme_tagcloud', 'shopme_tagcloud_status', '1', 0),
+(11015, 0, 'shopme_tagcloud', 'shopme_tagcloud_limit', '18', 0),
+(11014, 0, 'shopme_tagcloud', 'shopme_tagcloud_title', '{"en":"Popular Tags","se":"Popular Tags","1":"Popular Tags","2":"Popular Tags"}', 1),
+(2395, 0, 'shopme_category', 'shopme_category_status', '1', 0),
+(3037, 0, 'blogsetting', 'blogsetting_post_thumbs_h', '511', 0),
+(3036, 0, 'blogsetting', 'blogsetting_post_thumbs_w', '808', 0),
+(3034, 0, 'blogsetting', 'blogsetting_share', '1', 0),
+(3035, 0, 'blogsetting', 'blogsetting_post_thumb', '1', 0),
+(3032, 0, 'blogsetting', 'blogsetting_post_page_view', '1', 0),
+(3033, 0, 'blogsetting', 'blogsetting_post_author', '1', 0),
+(3031, 0, 'blogsetting', 'blogsetting_post_comments_count', '1', 0),
+(3030, 0, 'blogsetting', 'blogsetting_post_date_added', '1', 0),
+(3029, 0, 'blogsetting', 'blogsetting_author', '1', 0),
+(3028, 0, 'blogsetting', 'blogsetting_page_view', '1', 0),
+(3027, 0, 'blogsetting', 'blogsetting_comments_count', '1', 0),
+(3026, 0, 'blogsetting', 'blogsetting_date_added', '1', 0),
+(3025, 0, 'blogsetting', 'blogsetting_thumbs_h', '511', 0),
+(3024, 0, 'blogsetting', 'blogsetting_thumbs_w', '808', 0),
+(3023, 0, 'blogsetting', 'blogsetting_layout', '1', 0),
+(3022, 0, 'blogsetting', 'blogsetting_blogs_per_page', '3', 0),
+(3021, 0, 'blogsetting', 'blogsetting_home_meta_keyword', '{"en":"","se":"","1":"","2":""}', 1),
+(3020, 0, 'blogsetting', 'blogsetting_home_meta_description', '{"en":"","se":"","1":"","2":""}', 1),
+(3019, 0, 'blogsetting', 'blogsetting_home_description', '{"en":"&lt;p&gt;&lt;br&gt;&lt;\\/p&gt;","se":"&lt;p&gt;&lt;br&gt;&lt;\\/p&gt;","1":"&lt;p&gt;&lt;br&gt;&lt;\\/p&gt;","2":"&lt;p&gt;&lt;br&gt;&lt;\\/p&gt;"}', 1),
+(11331, 0, 'config', 'config_name', 'Мой Магазин', 0),
+(11332, 0, 'config', 'config_owner', 'Мое Имя', 0),
+(11333, 0, 'config', 'config_address', '', 0);
 
 -- --------------------------------------------------------
 
@@ -3242,6 +3933,59 @@ CREATE TABLE IF NOT EXISTS `oc_store` (
   `url` varchar(255) NOT NULL,
   `ssl` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_tab`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_tab` (
+  `tab_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `position` tinyint(1) NOT NULL DEFAULT '1',
+  `show_empty` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_tab_description`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_tab_description` (
+  `tab_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_tag_cloud`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_tag_cloud` (
+  `qty` int(11) NOT NULL,
+  `tag` varchar(255) COLLATE utf8_bin NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `oc_tag_cloud`
+--
+
+INSERT INTO `oc_tag_cloud` (`qty`, `tag`, `language_id`, `store_id`) VALUES
+(1, 'Apple', 1, 0),
+(1, 'Canon', 1, 0),
+(1, 'iPad', 1, 0),
+(1, 'Sample Tag', 1, 0),
+(1, 'Apple', 2, 0),
+(1, 'Canon', 2, 0),
+(1, 'iPad', 2, 0),
+(1, 'Sample Tag', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -3331,6 +4075,57 @@ INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`
 (120, 10, 87, 'store', 0),
 (128, 9, 86, 'shipping', 1),
 (127, 9, 87, 'shipping', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_testimonial`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_testimonial` (
+  `testimonial_id` int(11) NOT NULL,
+  `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `city` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(96) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `oc_testimonial`
+--
+
+INSERT INTO `oc_testimonial` (`testimonial_id`, `name`, `city`, `email`, `status`, `date_added`) VALUES
+(1, 'John Doe', 'New York', 'email@address.com', 1, '2015-06-18 05:57:20'),
+(2, 'Johanna Doe', 'Stockholm', 'sample@example.com', 1, '2015-06-18 05:57:48'),
+(3, 'Anna Doe', 'Madrid', 'email@example.com', 1, '2015-06-18 05:58:11'),
+(4, 'Sample Name', 'London', 'sample@example.com', 1, '2015-06-18 05:58:55');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `oc_testimonial_description`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_testimonial_description` (
+  `testimonial_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `oc_testimonial_description`
+--
+
+INSERT INTO `oc_testimonial_description` (`testimonial_id`, `language_id`, `description`) VALUES
+(1, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(1, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(2, 1, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'),
+(2, 2, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'),
+(3, 1, 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'),
+(3, 2, 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'),
+(4, 1, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.'),
+(4, 2, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.');
 
 -- --------------------------------------------------------
 
@@ -3515,7 +4310,7 @@ CREATE TABLE IF NOT EXISTS `oc_user_group` (
 --
 
 INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Administrator', '{"access":["analytics/google_analytics","captcha/basic_captcha","captcha/google_captcha","catalog/attribute","catalog/attribute_group","catalog/category","catalog/download","catalog/filter","catalog/information","catalog/manufacturer","catalog/option","catalog/product","catalog/recurring","catalog/review","common/column_left","common/filemanager","common/menu","common/profile","common/sass","common/stats","customer/custom_field","customer/customer","customer/customer_group","design/banner","design/layout","extension/analytics","extension/captcha","extension/feed","extension/fraud","extension/installer","extension/modification","extension/module","extension/openbay","extension/payment","extension/shipping","extension/total","feed/google_base","feed/google_sitemap","feed/openbaypro","fraud/fraudlabspro","fraud/ip","fraud/maxmind","localisation/country","localisation/currency","localisation/geo_zone","localisation/language","localisation/length_class","localisation/location","localisation/order_status","localisation/return_action","localisation/return_reason","localisation/return_status","localisation/stock_status","localisation/tax_class","localisation/tax_rate","localisation/weight_class","localisation/zone","marketing/affiliate","marketing/contact","marketing/coupon","marketing/marketing","module/account","module/affiliate","module/amazon_login","module/amazon_pay","module/banner","module/bestseller","module/carousel","module/category","module/ebay_listing","module/featured","module/filter","module/google_hangouts","module/html","module/information","module/latest","module/pp_button","module/pp_login","module/slideshow","module/special","module/store","module/unisender","octeam/toolset","octeam_tools/cache","octeam_tools/seo_manager","openbay/amazon","openbay/amazon_listing","openbay/amazon_product","openbay/amazonus","openbay/amazonus_listing","openbay/amazonus_product","openbay/ebay","openbay/ebay_profile","openbay/ebay_template","openbay/etsy","openbay/etsy_product","openbay/etsy_shipping","openbay/etsy_shop","payment/amazon_login_pay","payment/authorizenet_aim","payment/authorizenet_sim","payment/bank_transfer","payment/bluepay_hosted","payment/bluepay_redirect","payment/cheque","payment/cod","payment/firstdata","payment/firstdata_remote","payment/free_checkout","payment/g2apay","payment/globalpay","payment/globalpay_remote","payment/klarna_account","payment/klarna_invoice","payment/liqpay","payment/nochex","payment/paymate","payment/paypoint","payment/payza","payment/perpetual_payments","payment/pp_express","payment/pp_payflow","payment/pp_payflow_iframe","payment/pp_pro","payment/pp_pro_iframe","payment/pp_standard","payment/qiwi_rest","payment/realex","payment/realex_remote","payment/sagepay_direct","payment/sagepay_server","payment/sagepay_us","payment/sberbank_transfer","payment/securetrading_pp","payment/securetrading_ws","payment/skrill","payment/twocheckout","payment/web_payment_software","payment/worldpay","report/affiliate","report/affiliate_activity","report/affiliate_login","report/customer_activity","report/customer_credit","report/customer_login","report/customer_online","report/customer_order","report/customer_reward","report/marketing","report/product_purchased","report/product_viewed","report/sale_coupon","report/sale_order","report/sale_return","report/sale_shipping","report/sale_tax","sale/order","sale/recurring","sale/return","sale/voucher","sale/voucher_theme","setting/setting","setting/store","shipping/auspost","shipping/citylink","shipping/fedex","shipping/flat","shipping/free","shipping/item","shipping/parcelforce_48","shipping/pickup","shipping/royal_mail","shipping/ups","shipping/usps","shipping/weight","tool/backup","tool/error_log","tool/upload","total/coupon","total/credit","total/handling","total/klarna_fee","total/low_order_fee","total/reward","total/shipping","total/sub_total","total/tax","total/total","total/voucher","user/api","user/user","user/user_permission"],"modify":["analytics/google_analytics","captcha/basic_captcha","captcha/google_captcha","catalog/attribute","catalog/attribute_group","catalog/category","catalog/download","catalog/filter","catalog/information","catalog/manufacturer","catalog/option","catalog/product","catalog/recurring","catalog/review","common/column_left","common/filemanager","common/menu","common/profile","common/sass","common/stats","customer/custom_field","customer/customer","customer/customer_group","design/banner","design/layout","extension/analytics","extension/captcha","extension/feed","extension/fraud","extension/installer","extension/modification","extension/module","extension/openbay","extension/payment","extension/shipping","extension/total","feed/google_base","feed/google_sitemap","feed/openbaypro","fraud/fraudlabspro","fraud/ip","fraud/maxmind","localisation/country","localisation/currency","localisation/geo_zone","localisation/language","localisation/length_class","localisation/location","localisation/order_status","localisation/return_action","localisation/return_reason","localisation/return_status","localisation/stock_status","localisation/tax_class","localisation/tax_rate","localisation/weight_class","localisation/zone","marketing/affiliate","marketing/contact","marketing/coupon","marketing/marketing","module/account","module/affiliate","module/amazon_login","module/amazon_pay","module/banner","module/bestseller","module/carousel","module/category","module/ebay_listing","module/featured","module/filter","module/google_hangouts","module/html","module/information","module/latest","module/pp_button","module/pp_login","module/slideshow","module/special","module/store","module/unisender","octeam/toolset","octeam_tools/cache","octeam_tools/seo_manager","openbay/amazon","openbay/amazon_listing","openbay/amazon_product","openbay/amazonus","openbay/amazonus_listing","openbay/amazonus_product","openbay/ebay","openbay/ebay_profile","openbay/ebay_template","openbay/etsy","openbay/etsy_product","openbay/etsy_shipping","openbay/etsy_shop","payment/amazon_login_pay","payment/authorizenet_aim","payment/authorizenet_sim","payment/bank_transfer","payment/bluepay_hosted","payment/bluepay_redirect","payment/cheque","payment/cod","payment/firstdata","payment/firstdata_remote","payment/free_checkout","payment/g2apay","payment/globalpay","payment/globalpay_remote","payment/klarna_account","payment/klarna_invoice","payment/liqpay","payment/nochex","payment/paymate","payment/paypoint","payment/payza","payment/perpetual_payments","payment/pp_express","payment/pp_payflow","payment/pp_payflow_iframe","payment/pp_pro","payment/pp_pro_iframe","payment/pp_standard","payment/qiwi_rest","payment/realex","payment/realex_remote","payment/sagepay_direct","payment/sagepay_server","payment/sagepay_us","payment/sberbank_transfer","payment/securetrading_pp","payment/securetrading_ws","payment/skrill","payment/twocheckout","payment/web_payment_software","payment/worldpay","report/affiliate","report/affiliate_activity","report/affiliate_login","report/customer_activity","report/customer_credit","report/customer_login","report/customer_online","report/customer_order","report/customer_reward","report/marketing","report/product_purchased","report/product_viewed","report/sale_coupon","report/sale_order","report/sale_return","report/sale_shipping","report/sale_tax","sale/order","sale/recurring","sale/return","sale/voucher","sale/voucher_theme","setting/setting","setting/store","shipping/auspost","shipping/citylink","shipping/fedex","shipping/flat","shipping/free","shipping/item","shipping/parcelforce_48","shipping/pickup","shipping/royal_mail","shipping/ups","shipping/usps","shipping/weight","tool/backup","tool/error_log","tool/upload","total/coupon","total/credit","total/handling","total/klarna_fee","total/low_order_fee","total/reward","total/shipping","total/sub_total","total/tax","total/total","total/voucher","user/api","user/user","user/user_permission"],"hiden":["module/amazon_login","module/amazon_pay","module/ebay_listing","module/pp_button","module/pp_login","payment/amazon_login_pay","payment/authorizenet_aim","payment/authorizenet_sim","payment/bluepay_hosted","payment/bluepay_redirect","payment/cheque","payment/firstdata","payment/firstdata_remote","payment/g2apay","payment/globalpay","payment/globalpay_remote","payment/klarna_account","payment/klarna_invoice","payment/liqpay","payment/nochex","payment/paymate","payment/paypoint","payment/payza","payment/perpetual_payments","payment/pp_express","payment/pp_payflow","payment/pp_payflow_iframe","payment/pp_pro","payment/pp_pro_iframe","payment/realex","payment/realex_remote","payment/sagepay_direct","payment/sagepay_server","payment/sagepay_us","payment/securetrading_pp","payment/securetrading_ws","payment/skrill","payment/twocheckout","payment/web_payment_software","payment/worldpay","shipping/auspost","shipping/by_total","shipping/citylink","shipping/fedex","shipping/royal_mail","shipping/ups","shipping/usps"]}'),
+(1, 'Administrator', '{"access":["analytics\\/google_analytics","blog\\/blog","blog\\/blog_category","blog\\/blog_comment","blog\\/blog_setting","captcha\\/basic_captcha","captcha\\/google_captcha","catalog\\/attribute","catalog\\/attribute_group","catalog\\/category","catalog\\/download","catalog\\/filter","catalog\\/information","catalog\\/manufacturer","catalog\\/option","catalog\\/product","catalog\\/question","catalog\\/recurring","catalog\\/review","catalog\\/tab","catalog\\/testimonial","common\\/column_left","common\\/filemanager","common\\/menu","common\\/profile","common\\/sass","common\\/stats","customer\\/custom_field","customer\\/customer","customer\\/customer_group","design\\/banner","design\\/layout","extension\\/analytics","extension\\/captcha","extension\\/feed","extension\\/fraud","extension\\/installer","extension\\/modification","extension\\/module","extension\\/openbay","extension\\/payment","extension\\/shipping","extension\\/total","feed\\/google_base","feed\\/google_sitemap","feed\\/openbaypro","fraud\\/fraudlabspro","fraud\\/ip","fraud\\/maxmind","localisation\\/country","localisation\\/currency","localisation\\/geo_zone","localisation\\/language","localisation\\/length_class","localisation\\/location","localisation\\/order_status","localisation\\/return_action","localisation\\/return_reason","localisation\\/return_status","localisation\\/stock_status","localisation\\/tax_class","localisation\\/tax_rate","localisation\\/weight_class","localisation\\/zone","marketing\\/affiliate","marketing\\/contact","marketing\\/coupon","marketing\\/marketing","module\\/account","module\\/affiliate","module\\/amazon_login","module\\/amazon_pay","module\\/banner","module\\/bestseller","module\\/blog_category","module\\/blog_latest","module\\/carousel","module\\/category","module\\/d_ajax_search","module\\/ebay_listing","module\\/faqmanager","module\\/featured","module\\/filter","module\\/google_hangouts","module\\/html","module\\/information","module\\/latest","module\\/megamenu","module\\/megamenu_output","module\\/newsletter","module\\/pp_button","module\\/pp_login","module\\/quickcheckout","module\\/revslideropencart","module\\/revslideroutput","module\\/shopme","module\\/shopme_banner","module\\/shopme_bannerwall","module\\/shopme_carousel","module\\/shopme_category","module\\/shopme_contact","module\\/shopme_content","module\\/shopme_deals","module\\/shopme_facebook","module\\/shopme_productbrand","module\\/shopme_recently","module\\/shopme_socials","module\\/shopme_tagcloud","module\\/shopme_testimonial","module\\/shopme_twitterfeed","module\\/showintabs","module\\/showintabs_output","module\\/slideshow","module\\/special","module\\/store","module\\/unisender","octeam\\/toolset","octeam_tools\\/cache","octeam_tools\\/seo_manager","openbay\\/amazon","openbay\\/amazon_listing","openbay\\/amazon_product","openbay\\/amazonus","openbay\\/amazonus_listing","openbay\\/amazonus_product","openbay\\/ebay","openbay\\/ebay_profile","openbay\\/ebay_template","openbay\\/etsy","openbay\\/etsy_product","openbay\\/etsy_shipping","openbay\\/etsy_shop","payment\\/amazon_login_pay","payment\\/authorizenet_aim","payment\\/authorizenet_sim","payment\\/bank_transfer","payment\\/bluepay_hosted","payment\\/bluepay_redirect","payment\\/cheque","payment\\/cod","payment\\/firstdata","payment\\/firstdata_remote","payment\\/free_checkout","payment\\/g2apay","payment\\/globalpay","payment\\/globalpay_remote","payment\\/klarna_account","payment\\/klarna_invoice","payment\\/liqpay","payment\\/nochex","payment\\/paymate","payment\\/paypoint","payment\\/payza","payment\\/perpetual_payments","payment\\/pp_express","payment\\/pp_payflow","payment\\/pp_payflow_iframe","payment\\/pp_pro","payment\\/pp_pro_iframe","payment\\/pp_standard","payment\\/qiwi_rest","payment\\/realex","payment\\/realex_remote","payment\\/sagepay_direct","payment\\/sagepay_server","payment\\/sagepay_us","payment\\/sberbank_transfer","payment\\/securetrading_pp","payment\\/securetrading_ws","payment\\/skrill","payment\\/twocheckout","payment\\/web_payment_software","payment\\/worldpay","report\\/affiliate","report\\/affiliate_activity","report\\/affiliate_login","report\\/customer_activity","report\\/customer_credit","report\\/customer_login","report\\/customer_online","report\\/customer_order","report\\/customer_reward","report\\/marketing","report\\/product_purchased","report\\/product_viewed","report\\/sale_coupon","report\\/sale_order","report\\/sale_return","report\\/sale_shipping","report\\/sale_tax","sale\\/order","sale\\/recurring","sale\\/return","sale\\/subscriber","sale\\/voucher","sale\\/voucher_theme","setting\\/setting","setting\\/store","shipping\\/auspost","shipping\\/by_total","shipping\\/citylink","shipping\\/fedex","shipping\\/flat","shipping\\/free","shipping\\/item","shipping\\/parcelforce_48","shipping\\/pickup","shipping\\/royal_mail","shipping\\/ups","shipping\\/usps","shipping\\/weight","tool\\/backup","tool\\/error_log","tool\\/upload","total\\/coupon","total\\/credit","total\\/handling","total\\/klarna_fee","total\\/low_order_fee","total\\/reward","total\\/shipping","total\\/sub_total","total\\/tax","total\\/total","total\\/voucher","user\\/api","user\\/user","user\\/user_permission"],"modify":["analytics\\/google_analytics","blog\\/blog","blog\\/blog_category","blog\\/blog_comment","blog\\/blog_setting","captcha\\/basic_captcha","captcha\\/google_captcha","catalog\\/attribute","catalog\\/attribute_group","catalog\\/category","catalog\\/download","catalog\\/filter","catalog\\/information","catalog\\/manufacturer","catalog\\/option","catalog\\/product","catalog\\/question","catalog\\/recurring","catalog\\/review","catalog\\/tab","catalog\\/testimonial","common\\/column_left","common\\/filemanager","common\\/menu","common\\/profile","common\\/sass","common\\/stats","customer\\/custom_field","customer\\/customer","customer\\/customer_group","design\\/banner","design\\/layout","extension\\/analytics","extension\\/captcha","extension\\/feed","extension\\/fraud","extension\\/installer","extension\\/modification","extension\\/module","extension\\/openbay","extension\\/payment","extension\\/shipping","extension\\/total","feed\\/google_base","feed\\/google_sitemap","feed\\/openbaypro","fraud\\/fraudlabspro","fraud\\/ip","fraud\\/maxmind","localisation\\/country","localisation\\/currency","localisation\\/geo_zone","localisation\\/language","localisation\\/length_class","localisation\\/location","localisation\\/order_status","localisation\\/return_action","localisation\\/return_reason","localisation\\/return_status","localisation\\/stock_status","localisation\\/tax_class","localisation\\/tax_rate","localisation\\/weight_class","localisation\\/zone","marketing\\/affiliate","marketing\\/contact","marketing\\/coupon","marketing\\/marketing","module\\/account","module\\/affiliate","module\\/amazon_login","module\\/amazon_pay","module\\/banner","module\\/bestseller","module\\/blog_category","module\\/blog_latest","module\\/carousel","module\\/category","module\\/d_ajax_search","module\\/ebay_listing","module\\/faqmanager","module\\/featured","module\\/filter","module\\/google_hangouts","module\\/html","module\\/information","module\\/latest","module\\/megamenu","module\\/megamenu_output","module\\/newsletter","module\\/pp_button","module\\/pp_login","module\\/quickcheckout","module\\/revslideropencart","module\\/revslideroutput","module\\/shopme","module\\/shopme_banner","module\\/shopme_bannerwall","module\\/shopme_carousel","module\\/shopme_category","module\\/shopme_contact","module\\/shopme_content","module\\/shopme_deals","module\\/shopme_facebook","module\\/shopme_productbrand","module\\/shopme_recently","module\\/shopme_socials","module\\/shopme_tagcloud","module\\/shopme_testimonial","module\\/shopme_twitterfeed","module\\/showintabs","module\\/showintabs_output","module\\/slideshow","module\\/special","module\\/store","module\\/unisender","octeam\\/toolset","octeam_tools\\/cache","octeam_tools\\/seo_manager","openbay\\/amazon","openbay\\/amazon_listing","openbay\\/amazon_product","openbay\\/amazonus","openbay\\/amazonus_listing","openbay\\/amazonus_product","openbay\\/ebay","openbay\\/ebay_profile","openbay\\/ebay_template","openbay\\/etsy","openbay\\/etsy_product","openbay\\/etsy_shipping","openbay\\/etsy_shop","payment\\/amazon_login_pay","payment\\/authorizenet_aim","payment\\/authorizenet_sim","payment\\/bank_transfer","payment\\/bluepay_hosted","payment\\/bluepay_redirect","payment\\/cheque","payment\\/cod","payment\\/firstdata","payment\\/firstdata_remote","payment\\/free_checkout","payment\\/g2apay","payment\\/globalpay","payment\\/globalpay_remote","payment\\/klarna_account","payment\\/klarna_invoice","payment\\/liqpay","payment\\/nochex","payment\\/paymate","payment\\/paypoint","payment\\/payza","payment\\/perpetual_payments","payment\\/pp_express","payment\\/pp_payflow","payment\\/pp_payflow_iframe","payment\\/pp_pro","payment\\/pp_pro_iframe","payment\\/pp_standard","payment\\/qiwi_rest","payment\\/realex","payment\\/realex_remote","payment\\/sagepay_direct","payment\\/sagepay_server","payment\\/sagepay_us","payment\\/sberbank_transfer","payment\\/securetrading_pp","payment\\/securetrading_ws","payment\\/skrill","payment\\/twocheckout","payment\\/web_payment_software","payment\\/worldpay","report\\/affiliate","report\\/affiliate_activity","report\\/affiliate_login","report\\/customer_activity","report\\/customer_credit","report\\/customer_login","report\\/customer_online","report\\/customer_order","report\\/customer_reward","report\\/marketing","report\\/product_purchased","report\\/product_viewed","report\\/sale_coupon","report\\/sale_order","report\\/sale_return","report\\/sale_shipping","report\\/sale_tax","sale\\/order","sale\\/recurring","sale\\/return","sale\\/subscriber","sale\\/voucher","sale\\/voucher_theme","setting\\/setting","setting\\/store","shipping\\/auspost","shipping\\/by_total","shipping\\/citylink","shipping\\/fedex","shipping\\/flat","shipping\\/free","shipping\\/item","shipping\\/parcelforce_48","shipping\\/pickup","shipping\\/royal_mail","shipping\\/ups","shipping\\/usps","shipping\\/weight","tool\\/backup","tool\\/error_log","tool\\/upload","total\\/coupon","total\\/credit","total\\/handling","total\\/klarna_fee","total\\/low_order_fee","total\\/reward","total\\/shipping","total\\/sub_total","total\\/tax","total\\/total","total\\/voucher","user\\/api","user\\/user","user\\/user_permission"],"hiden":["module\\/account","module\\/affiliate","module\\/amazon_login","module\\/amazon_pay","module\\/banner","module\\/bestseller","module\\/blog_category","module\\/blog_latest","module\\/carousel","module\\/category","module\\/d_ajax_search","module\\/ebay_listing","module\\/faqmanager","module\\/featured","module\\/filter","module\\/google_hangouts","module\\/html","module\\/information","module\\/latest","module\\/megamenu","module\\/megamenu_output","module\\/newsletter","module\\/pp_button","module\\/pp_login","module\\/quickcheckout","module\\/revslideropencart","module\\/revslideroutput","module\\/shopme","module\\/shopme_banner","module\\/shopme_bannerwall","module\\/shopme_carousel","module\\/shopme_category","module\\/shopme_contact","module\\/shopme_content","module\\/shopme_deals","module\\/shopme_facebook","module\\/shopme_productbrand","module\\/shopme_recently","module\\/shopme_socials","module\\/shopme_tagcloud","module\\/shopme_testimonial","module\\/shopme_twitterfeed","module\\/showintabs","module\\/showintabs_output","module\\/slideshow","module\\/special","module\\/store","module\\/unisender","payment\\/amazon_login_pay","payment\\/authorizenet_aim","payment\\/authorizenet_sim","payment\\/bank_transfer","payment\\/bluepay_hosted","payment\\/bluepay_redirect","payment\\/cheque","payment\\/cod","payment\\/firstdata","payment\\/firstdata_remote","payment\\/free_checkout","payment\\/g2apay","payment\\/globalpay","payment\\/globalpay_remote","payment\\/klarna_account","payment\\/klarna_invoice","payment\\/liqpay","payment\\/nochex","payment\\/paymate","payment\\/paypoint","payment\\/payza","payment\\/perpetual_payments","payment\\/pp_express","payment\\/pp_payflow","payment\\/pp_payflow_iframe","payment\\/pp_pro","payment\\/pp_pro_iframe","payment\\/pp_standard","payment\\/qiwi_rest","payment\\/realex","payment\\/realex_remote","payment\\/sagepay_direct","payment\\/sagepay_server","payment\\/sagepay_us","payment\\/sberbank_transfer","payment\\/securetrading_pp","payment\\/securetrading_ws","payment\\/skrill","payment\\/twocheckout","payment\\/web_payment_software","payment\\/worldpay","shipping\\/auspost","shipping\\/by_total","shipping\\/citylink","shipping\\/fedex","shipping\\/flat","shipping\\/free","shipping\\/item","shipping\\/parcelforce_48","shipping\\/pickup","shipping\\/royal_mail","shipping\\/ups","shipping\\/usps","shipping\\/weight"]}'),
 (10, 'Demonstration', '');
 
 -- --------------------------------------------------------
@@ -7728,6 +8523,55 @@ ALTER TABLE `oc_banner_image_description`
   ADD PRIMARY KEY (`banner_image_id`,`language_id`);
 
 --
+-- Индексы таблицы `oc_blog`
+--
+ALTER TABLE `oc_blog`
+  ADD PRIMARY KEY (`blog_id`);
+
+--
+-- Индексы таблицы `oc_blog_category`
+--
+ALTER TABLE `oc_blog_category`
+  ADD PRIMARY KEY (`blog_category_id`);
+
+--
+-- Индексы таблицы `oc_blog_category_description`
+--
+ALTER TABLE `oc_blog_category_description`
+  ADD PRIMARY KEY (`blog_category_id`,`language_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- Индексы таблицы `oc_blog_category_to_layout`
+--
+ALTER TABLE `oc_blog_category_to_layout`
+  ADD PRIMARY KEY (`blog_category_id`,`store_id`);
+
+--
+-- Индексы таблицы `oc_blog_category_to_store`
+--
+ALTER TABLE `oc_blog_category_to_store`
+  ADD PRIMARY KEY (`blog_category_id`,`store_id`);
+
+--
+-- Индексы таблицы `oc_blog_comment`
+--
+ALTER TABLE `oc_blog_comment`
+  ADD PRIMARY KEY (`blog_comment_id`);
+
+--
+-- Индексы таблицы `oc_blog_to_category`
+--
+ALTER TABLE `oc_blog_to_category`
+  ADD PRIMARY KEY (`blog_id`,`blog_category_id`);
+
+--
+-- Индексы таблицы `oc_blog_to_layout`
+--
+ALTER TABLE `oc_blog_to_layout`
+  ADD PRIMARY KEY (`blog_id`,`store_id`);
+
+--
 -- Индексы таблицы `oc_cart`
 --
 ALTER TABLE `oc_cart`
@@ -8066,6 +8910,12 @@ ALTER TABLE `oc_module`
   ADD PRIMARY KEY (`module_id`);
 
 --
+-- Индексы таблицы `oc_newsletter`
+--
+ALTER TABLE `oc_newsletter`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `oc_option`
 --
 ALTER TABLE `oc_option`
@@ -8227,6 +9077,12 @@ ALTER TABLE `oc_product_special`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Индексы таблицы `oc_product_tab`
+--
+ALTER TABLE `oc_product_tab`
+  ADD PRIMARY KEY (`product_id`,`tab_id`,`language_id`);
+
+--
 -- Индексы таблицы `oc_product_to_category`
 --
 ALTER TABLE `oc_product_to_category`
@@ -8250,6 +9106,12 @@ ALTER TABLE `oc_product_to_layout`
 --
 ALTER TABLE `oc_product_to_store`
   ADD PRIMARY KEY (`product_id`,`store_id`);
+
+--
+-- Индексы таблицы `oc_question`
+--
+ALTER TABLE `oc_question`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Индексы таблицы `oc_recurring`
@@ -8301,6 +9163,48 @@ ALTER TABLE `oc_review`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Индексы таблицы `oc_revslider_attachment_images`
+--
+ALTER TABLE `oc_revslider_attachment_images`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Индексы таблицы `oc_revslider_css`
+--
+ALTER TABLE `oc_revslider_css`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `oc_revslider_layer_animations`
+--
+ALTER TABLE `oc_revslider_layer_animations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `oc_revslider_settings`
+--
+ALTER TABLE `oc_revslider_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `oc_revslider_sliders`
+--
+ALTER TABLE `oc_revslider_sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `oc_revslider_slides`
+--
+ALTER TABLE `oc_revslider_slides`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `oc_revslider_static_slides`
+--
+ALTER TABLE `oc_revslider_static_slides`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `oc_setting`
 --
 ALTER TABLE `oc_setting`
@@ -8317,6 +9221,24 @@ ALTER TABLE `oc_stock_status`
 --
 ALTER TABLE `oc_store`
   ADD PRIMARY KEY (`store_id`);
+
+--
+-- Индексы таблицы `oc_tab`
+--
+ALTER TABLE `oc_tab`
+  ADD PRIMARY KEY (`tab_id`);
+
+--
+-- Индексы таблицы `oc_tab_description`
+--
+ALTER TABLE `oc_tab_description`
+  ADD PRIMARY KEY (`tab_id`,`language_id`);
+
+--
+-- Индексы таблицы `oc_tag_cloud`
+--
+ALTER TABLE `oc_tag_cloud`
+  ADD PRIMARY KEY (`tag`,`language_id`,`store_id`);
 
 --
 -- Индексы таблицы `oc_tax_class`
@@ -8341,6 +9263,18 @@ ALTER TABLE `oc_tax_rate_to_customer_group`
 --
 ALTER TABLE `oc_tax_rule`
   ADD PRIMARY KEY (`tax_rule_id`);
+
+--
+-- Индексы таблицы `oc_testimonial`
+--
+ALTER TABLE `oc_testimonial`
+  ADD PRIMARY KEY (`testimonial_id`);
+
+--
+-- Индексы таблицы `oc_testimonial_description`
+--
+ALTER TABLE `oc_testimonial_description`
+  ADD PRIMARY KEY (`testimonial_id`,`language_id`);
 
 --
 -- Индексы таблицы `oc_upload`
@@ -8481,10 +9415,25 @@ ALTER TABLE `oc_banner`
 ALTER TABLE `oc_banner_image`
   MODIFY `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
 --
+-- AUTO_INCREMENT для таблицы `oc_blog`
+--
+ALTER TABLE `oc_blog`
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT для таблицы `oc_blog_category`
+--
+ALTER TABLE `oc_blog_category`
+  MODIFY `blog_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT для таблицы `oc_blog_comment`
+--
+ALTER TABLE `oc_blog_comment`
+  MODIFY `blog_comment_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+--
 -- AUTO_INCREMENT для таблицы `oc_cart`
 --
 ALTER TABLE `oc_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `oc_category`
 --
@@ -8579,7 +9528,7 @@ ALTER TABLE `oc_event`
 -- AUTO_INCREMENT для таблицы `oc_extension`
 --
 ALTER TABLE `oc_extension`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=457;
 --
 -- AUTO_INCREMENT для таблицы `oc_filter`
 --
@@ -8609,17 +9558,17 @@ ALTER TABLE `oc_language`
 -- AUTO_INCREMENT для таблицы `oc_layout`
 --
 ALTER TABLE `oc_layout`
-  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT для таблицы `oc_layout_module`
 --
 ALTER TABLE `oc_layout_module`
-  MODIFY `layout_module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+  MODIFY `layout_module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=673;
 --
 -- AUTO_INCREMENT для таблицы `oc_layout_route`
 --
 ALTER TABLE `oc_layout_route`
-  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
+  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=209;
 --
 -- AUTO_INCREMENT для таблицы `oc_length_class`
 --
@@ -8654,7 +9603,12 @@ ALTER TABLE `oc_modification`
 -- AUTO_INCREMENT для таблицы `oc_module`
 --
 ALTER TABLE `oc_module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT для таблицы `oc_newsletter`
+--
+ALTER TABLE `oc_newsletter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `oc_option`
 --
@@ -8751,6 +9705,11 @@ ALTER TABLE `oc_product_reward`
 ALTER TABLE `oc_product_special`
   MODIFY `product_special_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=440;
 --
+-- AUTO_INCREMENT для таблицы `oc_question`
+--
+ALTER TABLE `oc_question`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
 -- AUTO_INCREMENT для таблицы `oc_recurring`
 --
 ALTER TABLE `oc_recurring`
@@ -8786,10 +9745,45 @@ ALTER TABLE `oc_return_status`
 ALTER TABLE `oc_review`
   MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT для таблицы `oc_revslider_attachment_images`
+--
+ALTER TABLE `oc_revslider_attachment_images`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_css`
+--
+ALTER TABLE `oc_revslider_css`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_layer_animations`
+--
+ALTER TABLE `oc_revslider_layer_animations`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_settings`
+--
+ALTER TABLE `oc_revslider_settings`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_sliders`
+--
+ALTER TABLE `oc_revslider_sliders`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_slides`
+--
+ALTER TABLE `oc_revslider_slides`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT для таблицы `oc_revslider_static_slides`
+--
+ALTER TABLE `oc_revslider_static_slides`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT для таблицы `oc_setting`
 --
 ALTER TABLE `oc_setting`
-  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=296;
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11334;
 --
 -- AUTO_INCREMENT для таблицы `oc_stock_status`
 --
@@ -8800,6 +9794,11 @@ ALTER TABLE `oc_stock_status`
 --
 ALTER TABLE `oc_store`
   MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `oc_tab`
+--
+ALTER TABLE `oc_tab`
+  MODIFY `tab_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `oc_tax_class`
 --
@@ -8815,6 +9814,11 @@ ALTER TABLE `oc_tax_rate`
 --
 ALTER TABLE `oc_tax_rule`
   MODIFY `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=129;
+--
+-- AUTO_INCREMENT для таблицы `oc_testimonial`
+--
+ALTER TABLE `oc_testimonial`
+  MODIFY `testimonial_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `oc_upload`
 --

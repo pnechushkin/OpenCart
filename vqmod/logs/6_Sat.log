@@ -1,0 +1,27 @@
+---------- Date: 2017-05-13 18:31:40 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : D:\OpenServer\domains\ShopOC\vqmod/xml/shopme_newsletter.xml
+   id        : Newsletter subscribe for guests
+   version   : 2.0.1 and above
+   vqmver    : 
+   author    : Karl Pers - openthemer@gmail.com
+VQModObject::parseMods - Could not resolve path for [admin/model/sale/customer.php] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-05-13 18:31:45 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=oO3khZm1C3AlAdHCMIn87K9uSaHcxa6o
+MOD DETAILS:
+   modFile   : D:\OpenServer\domains\ShopOC\vqmod/xml/shopme_blog.xml
+   id        : OPENCART BLOG
+   version   : 1.0
+   vqmver    : 2.5.0
+   author    : Karl Pers - openthemer@gmail.com
+
+File Name    : admin/view/template/common/menu.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <li id="tools">
+----------------------------------------------------------------------
+
+
