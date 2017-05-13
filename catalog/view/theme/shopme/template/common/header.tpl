@@ -50,6 +50,8 @@ $modules = new Modules($this->registry);
 $top_menu = $modules->getModules('top_menu'); 
 ?>
 <?php echo @$google_analytics; ?>
+    
+
 <?php echo $shopme_styles; ?>
 </head>
 <body class="<?php echo $class; ?> <?php echo $config->get('shopme_default_product_style'); ?> <?php if ($config->get('shopme_use_custom')) { ?><?php echo $config->get('shopme_container_layout'); ?><?php } ?>">
