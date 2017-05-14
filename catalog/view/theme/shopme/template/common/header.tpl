@@ -50,7 +50,7 @@ $modules = new Modules($this->registry);
 $top_menu = $modules->getModules('top_menu'); 
 ?>
 <?php echo @$google_analytics; ?>
-    
+
 
 <?php echo $shopme_styles; ?>
 </head>

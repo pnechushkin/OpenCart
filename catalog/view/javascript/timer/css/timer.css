@@ -1,0 +1,164 @@
+/* Basic timer output */
+.product-timer-block {
+  margin: 14px 0px 14px 0px;
+  padding: 10px 10px 10px 10px;
+  border: 1px solid #a3a3a3;
+}
+.product-timer-block .timer, 
+.product-timer-block .prices-block {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px 0px 0px 0px;
+}
+.product-timer-block .special-price, 
+.product-timer-block .old-price {
+  display: inline-block;
+  width: 100%;
+}
+.timer {
+  text-align: center;
+  width: 60%;
+}
+.timer .text {
+  font-size: 17px;
+  color: #121212;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  padding: 0px 0px 0px 0px;
+}
+
+.prices-block {
+  /*padding: 5px 0px;*/
+  width: 38%;
+  line-height: 1.5;
+  text-align: center; 
+}
+.prices-block .special-price {
+  color: #e95144;
+  font-weight: normal;
+  font-size: 33px;
+  /*margin: 10px 0;*/
+  display: inline-block;
+}
+.prices-block .old-price {
+  font-size: 19px;
+  text-decoration: line-through;
+}
+
+
+/* Display on categories/specials, in modules */
+.timer-block .prices-block {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.timer-block .special-price, 
+.timer-block .old-price {
+  display: inline-block;
+  margin: 0px;
+  font-size: 14px;
+}
+.timer-block .special-price {
+  font-weight: bold;
+}
+.timer-block .old-price {
+  margin: 0 3px 0 3px;
+}
+
+
+/* long Label near product special & ordinary price */
+.percentage-discount {
+  background: #e95144;
+  color: #fff;
+  font-size: 11px;
+  border-radius: 3px;
+  padding: 2px 4px 2px 4px;
+  margin: 0px 4px 0px 0px;
+  position: relative;
+  z-index: 9;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+/* Discount stiker */
+.discount-sticker {
+  background-color: #FF3E30;
+  color: #FFFCF7;
+  float: right;
+  font-size: 12pt;
+  font-weight: 700;
+  padding: 4px 8px 4px;
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  z-index: 1;
+  padding-left: 10px;
+  right: 15px;
+}
+.discount-sticker::before {
+  border-style: solid;
+  border-width: 13px 9px;
+  content: "";
+  position: absolute;
+  border-color: #FF3E30 #FF3E30 rgb(255, 62, 48) transparent;
+  top: 0px;
+  left: -10px;
+  height: 100%;
+}
+
+
+/* jQuery Countdown styles 2.0.0. */
+.is-countdown {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  width: 99%;
+  margin: 0px 0px 0px 0px;
+  padding: 5px 0px 5px 0px;
+  display: inline-block;
+}
+.countdown-rtl {
+  direction: rtl;
+}
+.countdown-holding span {
+  color: #888;
+}
+.countdown-row {
+  clear: both;
+  width: 100%;
+  padding: 0px 2px;
+  display: block;
+  text-align: center;
+}
+.countdown-show1 .countdown-section {
+  width: 98%;
+}
+.countdown-show2 .countdown-section {
+  width: 48%;
+}
+.countdown-show3 .countdown-section {
+  width: 32.5%;
+}
+.countdown-show4 .countdown-section {
+  width: 24.5%;
+}
+.countdown-show5 .countdown-section {
+  width: 19.5%;
+}
+.countdown-show6 .countdown-section {
+  width: 16.25%;
+}
+.countdown-show7 .countdown-section {
+  width: 14%;
+}
+.countdown-section {
+  display: block;
+  float: left;
+  font-size: 75%;
+  text-align: center;
+  border-right: 1px solid #ccc;
+}
+
+.countdown-section:last-child {border:none;}
+.countdown-amount {font-size: 200%;}
+.countdown-period {display: block; font-size: 100%;}
+.countdown-descr {display: block; width: 100%;}
