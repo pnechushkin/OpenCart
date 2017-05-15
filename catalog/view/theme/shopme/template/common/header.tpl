@@ -53,6 +53,7 @@ $top_menu = $modules->getModules('top_menu');
 
 
 <?php echo $shopme_styles; ?>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body class="<?php echo $class; ?> <?php echo $config->get('shopme_default_product_style'); ?> <?php if ($config->get('shopme_use_custom')) { ?><?php echo $config->get('shopme_container_layout'); ?><?php } ?>">
 <?php echo $shopme_cookie; ?>

@@ -694,7 +694,7 @@ $in_content = $modules->getModules('in_content');
          
                 <div class="form-group">
                 <div class="col-sm-6">
-                <?php if ($site_key) { ?>
+                <?php if (@$site_key) { ?>
                 <div class="g-recaptcha" data-sitekey="<?php echo $site_key; ?>"></div>
                 <?php } ?>
                 </div>
